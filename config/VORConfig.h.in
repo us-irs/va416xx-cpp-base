@@ -1,0 +1,12 @@
+#ifndef CONFIG_VORCONIG_H
+#define CONFIG_VORCONIG_H
+
+#cmakedefine VOR_VERBOSE_LEVEL @VOR_VERBOSE_LEVEL@
+#cmakedefine VOR_SYSTEM_CLOCK @VOR_SYSTEM_CLOCK@
+
+#cmakedefine01 VOR_RTT_LOG
+
+#cmakedefine NVM_BINARY_1
+#cmakedefine NVM_BINARY_2
+
+#endif /* MISSION_POWER_CONFIG_VORCONFIG_H_ */

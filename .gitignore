@@ -1,0 +1,7 @@
+# CMake build folders are ignored
+/build*
+
+# Eclipse project files in root are ignored
+/.cproject
+/.project
+/.settings
