@@ -28,22 +28,22 @@
  */
 
 #include "va416xx.h"
-//#include "board.h"
+#include "VORConfig.h"
 
 /*----------------------------------------------------------------------------
   Define clocks (can override XTAL and EXTCLK in board.h)
  *----------------------------------------------------------------------------*/
 
-#ifndef XTAL
-#define  XTAL            (10000000UL)      /* Oscillator default frequency */
+#ifndef VOR_XTAL
+#define  VOR_XTAL           (10000000UL)      /* Oscillator default frequency */
 #endif
 
-#ifndef HBO
-#define  HBO             (20000000UL)      /* Internal HBO frequency */
+#ifndef VOR_HBO
+#define  VOR_HBO            (20000000UL)      /* Internal HBO frequency */
 #endif
 
-#ifndef EXTCLK
-#define  EXTCLK          (10000000UL)      /* XTAL minus default frequency */
+#ifndef VOR_EXTCLK
+#define  VOR_EXTCLK         (10000000UL)      /* XTAL minus default frequency */
 #endif
 
 /*----------------------------------------------------------------------------
@@ -56,7 +56,7 @@
 /*----------------------------------------------------------------------------
   System Core Clock Variable
  *----------------------------------------------------------------------------*/
-uint32_t SystemCoreClock = HBO; // default HBO CLK
+uint32_t SystemCoreClock = VOR_HBO; // default HBO CLK
 
 
 /*----------------------------------------------------------------------------
@@ -69,19 +69,19 @@ void SystemCoreClockUpdate (void)
   {
     case 0:
       // 00b - Internal HB Oscillator
-      SystemCoreClock = HBO;
+      SystemCoreClock = VOR_HBO;
       break;
     case 1:
       // 01b - XTAL minus
-      SystemCoreClock = EXTCLK;
+      SystemCoreClock = VOR_EXTCLK;
       break;
     case 2:
       // 10b - PLL output
       if((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_REF_CLK_SEL_Msk) == 0x1){
-        SystemCoreClock = XTAL;
+        SystemCoreClock = VOR_XTAL;
       }
       if((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_REF_CLK_SEL_Msk) == 0x2){
-        SystemCoreClock = EXTCLK;
+        SystemCoreClock = VOR_EXTCLK;
       }
       if((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_BYPASS_Msk) == 0){
         SystemCoreClock /= (((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_CLKR_Msk) >> 
@@ -94,7 +94,7 @@ void SystemCoreClockUpdate (void)
       break;
     case 3:
       // 11b - XTAL Oscillator
-      SystemCoreClock = XTAL;
+      SystemCoreClock = VOR_XTAL;
       break;
   }
   
@@ -138,5 +138,5 @@ void SystemInit (void)
   SCB->CCR |= SCB_CCR_UNALIGN_TRP_Msk;
 #endif
   
-  SystemCoreClock = HBO; // default HBO CLK
+  SystemCoreClock = VOR_HBO; // default HBO CLK
 }

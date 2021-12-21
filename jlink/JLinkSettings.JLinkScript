@@ -26,6 +26,7 @@ int DisableWatchdog(void) {
 
 int SetupTarget (void) {
   JLINK_SYS_Report("SetupTarget()");
+  DisableWatchdog();
   return DisableRomProt(); // ROM_PROT = 0x1
 }
 

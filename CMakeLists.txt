@@ -25,6 +25,11 @@ set_property(CACHE VOR_VERBOSE_LEVEL PROPERTY STRINGS 0 1 2)
 project(va416xx-template ASM C CXX)
 set(TARGET_NAME ${CMAKE_PROJECT_NAME})
 
+# Default REB1 frequency. Change to other frequency if desired
+set(VOR_XTAL 10000000UL)
+set(VOR_HBO 20000000UL)
+set(VOR_EXTCLK 10000000UL)
+
 option(NVM1 "Generate image which can be flashed to non-volatile memory at position 1" OFF)
 if(NOT NVM1)
     option(NVM2 "Generate image which can be flashed to non-volatile memory at position 1" OFF)

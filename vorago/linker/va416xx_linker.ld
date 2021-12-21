@@ -31,7 +31,7 @@ heap_size = 512;
  
 /* define beginning and ending of stack */
 _stack_start = ORIGIN(RAM) + LENGTH(RAM) - 4;
-_stack_end = _stack_start - stack_size;
+_stack_end  =_stack_start - stack_size;
  
 /* Define output sections */
 SECTIONS
@@ -39,7 +39,7 @@ SECTIONS
  	.text :
 	{
 		. = ALIGN(4); 
-		KEEP(*(.isr_vector))
+		KEEP(*(.vectors))
 		*(.text*)
 		
 		
@@ -108,21 +108,21 @@ SECTIONS
     	_edata = .;        		/* define a global symbol at data end */
   	} >RAM  
  	
-  /* Uninitialized data section */
-  . = ALIGN(4);
-  .bss :  /*  basic service set:  used for statically-allocated variables  */  
-  {
-    /*  Used by the startup in order to initialize the .bss section */
-    _sbss = .;         /* define a global symbol at bss start */
-    __bss_start__ = _sbss;
-    *(.bss)
-    *(.bss*)
-    *(COMMON)
- 
+    /* Uninitialized data section */
     . = ALIGN(4);
-    _ebss = .;         /* define a global symbol at bss end */
-    __bss_end__ = _ebss;
-  } >RAM
+    .bss :  /*  basic service set:  used for statically-allocated variables  */  
+    {
+        /*  Used by the startup in order to initialize the .bss section */
+        _sbss = .;         /* define a global symbol at bss start */
+        __bss_start__ = _sbss;
+        *(.bss)
+        *(.bss*)
+        *(COMMON)
+ 
+        . = ALIGN(4);
+        _ebss = .;         /* define a global symbol at bss end */
+        __bss_end__ = _ebss;
+    } >RAM
  
 	/* Heap section */
     . = ALIGN(4);
@@ -136,24 +136,10 @@ SECTIONS
     } > RAM
     
     /* Place symbol at heap end */
-    _eheap_ = 0x1fffd000;
-    _sstack = 0x10008000;
+    _eheap_ = 0x1fff5000;
+    _sstack = 0x1fff8000;
     /* This symbol is used by the start-up file ! */
     _stack_start = _sstack;
-    
-    /* Initially, the RTT section was placed after the stack */
-    /* Instead, it is the first data section (0x10000000) now */
-    /* RTT Section for SEGGER */
-    /* Section needs to be placed at specific address */
-    /* This address will be used by the RTT Viewer to find the control block */
-    /*
-    .RTTSection : AT( _test )
-    {
-    	*(.RTTSection)
-    	. = ALIGN(4);
-    	_edata = .;
-    } > SEGGER_RTT
-    */
     
     /* Remove information from the standard libraries */
 
