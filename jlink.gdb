@@ -1,6 +1,8 @@
 target remote localhost:2331
 
-monitor reset
+# For some reason, this is problematic even if the JLinkScript disabled the remote
+# write protection. Therefore, don't do it for now
+# monitor reset
 
 # *try* to stop at the user entry point (it might be gone due to inlining)
 break main
