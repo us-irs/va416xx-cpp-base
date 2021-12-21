@@ -1,3 +1,3 @@
 target_sources(${TARGET_NAME} PRIVATE
-    main.cpp
+    startup_va416xx.s
 )

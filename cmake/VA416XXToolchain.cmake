@@ -50,9 +50,9 @@ string (REPLACE ";" " " ABI_FLAGS "${ABI_FLAGS}")
 
 set(CMAKE_C_FLAGS 
     ${ABI_FLAGS}
-    CACHE STRING "C flags for the VA10820"
+    CACHE STRING "C flags for the VA416XX"
 )
 set(CMAKE_CXX_FLAGS 
     "${CMAKE_C_FLAGS}" 
-    CACHE STRING "C++ flags for the VA10820"
+    CACHE STRING "C++ flags for the VA416XX"
 )
