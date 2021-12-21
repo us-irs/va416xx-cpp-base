@@ -21,8 +21,8 @@ ENTRY(Reset_Handler)
 /* Specify the memory areas */
 MEMORY
 {
-	ROM (rx)        : ORIGIN = 0x00000000, LENGTH = 0x20000 /*128K*/
-	RAM (xrw)       : ORIGIN = 0x1FFF8000, LENGTH = 0x08000 /*32K*/
+	ROM (rx)        : ORIGIN = 0x00000000, LENGTH = 256K
+	RAM (xrw)       : ORIGIN = 0x1FFF8000, LENGTH = 32K
 }
  
 /* define stack size and heap size here */
