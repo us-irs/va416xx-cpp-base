@@ -22,7 +22,7 @@ set(CONFIG_PATH config)
 set(VOR_VERBOSE_LEVEL "1" CACHE STRING "Verbosity level for debug output")
 set_property(CACHE VOR_VERBOSE_LEVEL PROPERTY STRINGS 0 1 2)
 
-project(va10820-template ASM C CXX)
+project(va416xx-template ASM C CXX)
 set(TARGET_NAME ${CMAKE_PROJECT_NAME})
 
 option(NVM1 "Generate image which can be flashed to non-volatile memory at position 1" OFF)
@@ -31,13 +31,9 @@ if(NOT NVM1)
 endif()
 
 option(VOR_RTT_LOG "Use SEGGER RTT for logging messages" ON)
-# Default REB1 frequency. Change to other frequency if desired
-set(VOR_SYSTEM_CLOCK 50000000UL)
 
 set(LINK_SCRIPTS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vorago/linker")
-set(LINKER_SCRIPT_REGULAR ${LINK_SCRIPTS_PATH}/va108xx_linker.ld)
-set(LINKER_SCRIPT_NVM1 ${LINK_SCRIPTS_PATH}/va108xx_linker_nvm_pos1.ld)
-set(LINKER_SCRIPT_NVM2 ${LINK_SCRIPTS_PATH}/va108xx_linker_nvm_pos2.ld)
+set(LINKER_SCRIPT_REGULAR ${LINK_SCRIPTS_PATH}/va416xx_linker.ld)
 
 if(NVM1)
     set(LINKER_SCRIPT ${LINKER_SCRIPT_NVM1})

@@ -1,4 +1,4 @@
-C/C++ template project for VA1416xx based projects
+C/C++ template project for VA416xx based projects
 ========
 
 # Prerequisites
@@ -41,7 +41,7 @@ show how to do it in the commnand line
 2. Run the GDB application, for example `gdb-multiarch`
 
    ```sh
-   gdb-multiarch -q -x jlink.gdb build/va10820-template
+   gdb-multiarch -q -x jlink.gdb build/va416xx-template
    ```
 
 3. The debugger should now be stopped at the start of the application. Press `C` to continue
