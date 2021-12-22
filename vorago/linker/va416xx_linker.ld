@@ -30,8 +30,8 @@ stack_size = 1024;
 heap_size = 512;
  
 /* define beginning and ending of stack */
-_stack_start = ORIGIN(RAM) + LENGTH(RAM) - 4;
-_stack_end  =_stack_start - stack_size;
+__StackTop = ORIGIN(RAM) + LENGTH(RAM) - 4;
+_stack_end  =__StackTop - stack_size;
  
 /* Define output sections */
 SECTIONS
@@ -139,7 +139,7 @@ SECTIONS
     _eheap_ = 0x1fff5000;
     _sstack = 0x1fff8000;
     /* This symbol is used by the start-up file ! */
-    _stack_start = _sstack;
+    __StackTop = _sstack;
     
     /* Remove information from the standard libraries */
 
