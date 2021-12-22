@@ -1,3 +1,8 @@
+/*  Firstly it copies data from read only memory to RAM. There are two schemes
+ *  to copy. One can copy more than one sections. Another can only copy
+ *  one section.  The former scheme needs more instructions and read-only
+ *  data to implement than the latter.
+ *  Macro __STARTUP_COPY_MULTIPLE is used to choose between two schemes.  */
 #ifdef __STARTUP_COPY_MULTIPLE
 /*  Multiple sections scheme.
  *

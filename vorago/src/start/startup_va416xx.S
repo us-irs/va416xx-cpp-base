@@ -264,15 +264,12 @@ __Vectors:
 	.globl	Reset_Handler
 	.type	Reset_Handler, %function
 Reset_Handler:
-/*  Firstly it copies data from read only memory to RAM. There are two schemes
- *  to copy. One can copy more than one sections. Another can only copy
- *  one section.  The former scheme needs more instructions and read-only
- *  data to implement than the latter.
- *  Macro __STARTUP_COPY_MULTIPLE is used to choose between two schemes.  */
 
 #ifndef __NO_SYSTEM_INIT
 	bl	SystemInit
 #endif
+    /* Call static constructors. Important for C++ code. */
+    bl __libc_init_array
 
     bl   main
 

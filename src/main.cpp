@@ -3,4 +3,5 @@
 #include <cstdio>
 #include <cstddef>
 
-int main(void) {}
+int main(void) {
+}

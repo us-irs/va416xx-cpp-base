@@ -20,13 +20,13 @@ int DisableRomProt(void) {
 }
 
 int DisableWatchdog(void) {
+  JLINK_SYS_Report("Disabling watchdog");
   JLINK_MEM_WriteU32(0x400210C0, 0x1ACCE551); // WDOGLOCK = 0x1ACCE551
   JLINK_MEM_WriteU32(0x40021008, 0x0);        // WDOGCONTROL = 0x0 (diable)
 }
 
 int SetupTarget (void) {
   JLINK_SYS_Report("SetupTarget()");
-  DisableWatchdog();
   return DisableRomProt(); // ROM_PROT = 0x1
 }
 
