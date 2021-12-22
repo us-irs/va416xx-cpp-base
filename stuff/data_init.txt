@@ -1,0 +1,19 @@
+/*  Single section scheme.
+ *
+ *  The ranges of copy from/to are specified by following symbols
+ *    __etext: LMA of start of the section to copy from. Usually end of text
+ *    __data_start__: VMA of start of the section to copy to
+ *    __data_end__: VMA of end of the section to copy to
+ *
+ *  All addresses must be aligned to 4 bytes boundary.
+ */
+    ldr r1, =__etext
+    ldr r2, =_sidata
+    ldr r3, =_edata
+
+.L_loop1:
+    cmp r2, r3
+    ittt    lt
+    ldrlt   r0, [r1], #4
+    strlt   r0, [r2], #4
+    blt .L_loop1
