@@ -307,12 +307,27 @@ Reset_Handler:
     .pool
     .size	Reset_Handler, . - Reset_Handler
 
-    .align	1
+/* The default macro is not used for HardFault_Handler
+ * because this results in a poor debug illusion.
+ */
+     .align 1
+    .thumb_func
+    .weak    HardFault_Handler
+    .type    HardFault_Handler, %function
+    .fnstart
+HardFault_Handler:
+    b  .
+    .fnend
+    .size    HardFault_Handler, . - HardFault_Handler
+
+    .align  1
     .thumb_func
     .weak	Default_Handler
     .type	Default_Handler, %function
+    .fnstart
 Default_Handler:
     b	.
+    .fnend
     .size	Default_Handler, . - Default_Handler
 
 /*    Macro to define default handlers. Default handler
