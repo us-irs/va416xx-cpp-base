@@ -32,34 +32,34 @@
    ---------------------------------------------------------------------------*/
 
     .thumb
-	.syntax	unified
-	.cpu cortex-m4
-	.arch	armv7-m
+    .syntax	unified
+    .cpu cortex-m4
+    .arch	armv7-m
 
-	.section .vectors
-	.align	2
-	.globl	__Vectors
+    .section .vectors
+    .align	2
+    .globl	__Vectors
 __Vectors:
-	.long	_stack_start          /* Top of Stack */
-	.long	Reset_Handler         /* Reset Handler */
-	.long	NMI_Handler           /* NMI Handler */
-	.long	HardFault_Handler     /* Hard Fault Handler */
-	.long	MemManage_Handler     /* MPU Fault Handler */
-	.long	BusFault_Handler      /* Bus Fault Handler */
-	.long	UsageFault_Handler    /* Usage Fault Handler */
-	.long	0                     /* Reserved */
-	.long	0                     /* Reserved */
-	.long	0                     /* Reserved */
-	.long	0                     /* Reserved */
-	.long	SVC_Handler           /* SVCall Handler */
-	.long	DebugMon_Handler      /* Debug Monitor Handler */
-	.long	0                     /* Reserved */
-	.long	PendSV_Handler        /* PendSV Handler */
-	.long	SysTick_Handler       /* SysTick Handler */
+    .long	_stack_start          /* Top of Stack */
+    .long	Reset_Handler         /* Reset Handler */
+    .long	NMI_Handler           /* NMI Handler */
+    .long	HardFault_Handler     /* Hard Fault Handler */
+    .long	MemManage_Handler     /* MPU Fault Handler */
+    .long	BusFault_Handler      /* Bus Fault Handler */
+    .long	UsageFault_Handler    /* Usage Fault Handler */
+    .long	0                     /* Reserved */
+    .long	0                     /* Reserved */
+    .long	0                     /* Reserved */
+    .long	0                     /* Reserved */
+    .long	SVC_Handler           /* SVCall Handler */
+    .long	DebugMon_Handler      /* Debug Monitor Handler */
+    .long	0                     /* Reserved */
+    .long	PendSV_Handler        /* PendSV Handler */
+    .long	SysTick_Handler       /* SysTick Handler */
 
-	/* External interrupts */
-	.long	OC0_IRQHandler        	//   0:  Always 0
-	.long	OC1_IRQHandler          //   1:  Always 0
+    /* External interrupts */
+    .long	OC0_IRQHandler        	//   0:  Always 0
+    .long	OC1_IRQHandler          //   1:  Always 0
     .long   OC2_IRQHandler       	//   2:  Always 0
     .long   OC3_IRQHandler        	//   3:  Always 0
     .long   OC4_IRQHandler        	//   4:  Always 0
@@ -255,7 +255,7 @@ __Vectors:
     .long   FPU_IRQHandler          //  194
     .long   TXEV_IRQHandler         //  195
 
-	.size	__Vectors, . - __Vectors
+    .size	__Vectors, . - __Vectors
 
 	.text
 	.thumb
@@ -302,46 +302,46 @@ Reset_Handler:
     /* Call static constructors. Important for C++ code. */
     bl __libc_init_array
 
-    bl   main
+    bl _start
 
-	.pool
-	.size	Reset_Handler, . - Reset_Handler
+    .pool
+    .size	Reset_Handler, . - Reset_Handler
 
-	.align	1
-	.thumb_func
-	.weak	Default_Handler
-	.type	Default_Handler, %function
+    .align	1
+    .thumb_func
+    .weak	Default_Handler
+    .type	Default_Handler, %function
 Default_Handler:
-	b	.
-	.size	Default_Handler, . - Default_Handler
+    b	.
+    .size	Default_Handler, . - Default_Handler
 
 /*    Macro to define default handlers. Default handler
  *    will be weak symbol and just dead loops. They can be
  *    overwritten by other handlers */
-	.macro	def_irq_handler	handler_name
-	.weak	\handler_name
-	.set	\handler_name, Default_Handler
-	.endm
+    .macro	def_irq_handler	handler_name
+    .weak	\handler_name
+    .set	\handler_name, Default_Handler
+    .endm
 
-	def_irq_handler	NMI_Handler
-	def_irq_handler	HardFault_Handler
-	def_irq_handler	MemManage_Handler
-	def_irq_handler	BusFault_Handler
-	def_irq_handler	UsageFault_Handler
-	def_irq_handler	SVC_Handler
-	def_irq_handler	DebugMon_Handler
-	def_irq_handler	PendSV_Handler
-	def_irq_handler	SysTick_Handler
+    def_irq_handler	NMI_Handler
+    def_irq_handler	HardFault_Handler
+    def_irq_handler	MemManage_Handler
+    def_irq_handler	BusFault_Handler
+    def_irq_handler	UsageFault_Handler
+    def_irq_handler	SVC_Handler
+    def_irq_handler	DebugMon_Handler
+    def_irq_handler	PendSV_Handler
+    def_irq_handler	SysTick_Handler
 
-	def_irq_handler	OC0_IRQHandler
-	def_irq_handler	OC1_IRQHandler
-	def_irq_handler	OC2_IRQHandler
-	def_irq_handler	OC3_IRQHandler
-	def_irq_handler	OC4_IRQHandler
-	def_irq_handler	OC5_IRQHandler
-	def_irq_handler	OC6_IRQHandler
-	def_irq_handler	OC7_IRQHandler
-	def_irq_handler	OC8_IRQHandler
+    def_irq_handler	OC0_IRQHandler
+    def_irq_handler	OC1_IRQHandler
+    def_irq_handler	OC2_IRQHandler
+    def_irq_handler	OC3_IRQHandler
+    def_irq_handler	OC4_IRQHandler
+    def_irq_handler	OC5_IRQHandler
+    def_irq_handler	OC6_IRQHandler
+    def_irq_handler	OC7_IRQHandler
+    def_irq_handler	OC8_IRQHandler
     def_irq_handler OC9_IRQHandler
     def_irq_handler OC10_IRQHandler
     def_irq_handler OC11_IRQHandler
@@ -530,4 +530,4 @@ Default_Handler:
     def_irq_handler FPU_IRQHandler
     def_irq_handler TXEV_IRQHandler
 
-	.end
+    .end
