@@ -265,9 +265,40 @@ __Vectors:
 	.type	Reset_Handler, %function
 Reset_Handler:
 
-#ifndef __NO_SYSTEM_INIT
-	bl	SystemInit
-#endif
+  #ifndef __NO_SYSTEM_INIT
+    bl  SystemInit
+  #endif
+
+    # Code to set up .bss and .data taken from here
+    # https://github.com/rust-embedded/cortex-m-rt/blob/master/asm.S
+
+    # Initialise .bss memory. `_sbss` and `_ebss` come from the linker script.
+    ldr r0,=_sbss
+    ldr r1,=_ebss
+    mov r2,#0
+0:
+    cmp r1, r0
+    beq 1f
+    stm r0!, {r2}
+    b 0b
+1:
+
+
+    # Initialise .data memory. `__sdata`, `__sidata`, and `__edata` come from the
+    # linker script. Copy from r2 into r0 until r0 reaches r1.
+    ldr r0,=_sdata
+    ldr r1,=_edata
+    ldr r2,=_sidata
+2:
+    cmp r1, r0
+    beq 3f
+    # load 1 word from r2 to r3, inc r2
+    ldm r2!, {r3}
+    # store 1 word from r3 to r0, inc r0
+    stm r0!, {r3}
+    b 2b
+3:
+
     /* Call static constructors. Important for C++ code. */
     bl __libc_init_array
 

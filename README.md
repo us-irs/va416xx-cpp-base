@@ -1,26 +1,6 @@
 C/C++ template project for VA416xx based projects
 ========
 
-# WORK IN PROGRESS
-
-Currently, there are still issue with the Watchdog IRQ being triggered and the application
-being stuck in it.
-
-Steps to reproduce:
-
-1. Build the application like specified below
-2. Start the JLinkGDBServer with the provided JLinkScript file. You can
-   use `jlink-gdb.sh` to do this
-3. Use the following commands to load the application
-
-   ```sh
-   arm-none-eabi-gdb -q build/va416xx-template
-   target remote localhost:2331
-   load
-   ```
-
-4. Keep stepping. In the main function, after 1-2 steps, the `WDT_IRQHandler` will be triggered
-
 # Prerequisites
 
 1. ARM Cross-compiler installed and added to system path

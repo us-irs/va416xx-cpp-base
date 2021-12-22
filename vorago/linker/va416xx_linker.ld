@@ -83,12 +83,12 @@ SECTIONS
     } >ROM
     __exidx_end = .;
 
- 
- 	__etext = .;  
+    . = ALIGN(4);
+    __etext = .;  
  
   	/* can be used by the startup to initialize data */
  
-	_sidata = .;   
+    _sidata = .;   
 	
 	.RTTSection : AT ( _sidata )
 	{
