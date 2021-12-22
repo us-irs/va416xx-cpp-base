@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "name": "Debug",
+            // The user should start the J-Link server themselves for now. This is because the
+            // Cortex-Debug will issue a reset command, which is problematic even with
+            // a valid JLinkScript file
+            "servertype": "external",
+            "gdbTarget": "localhost:2331",
+            "cwd": "${workspaceRoot}",
+            "device": "Cortex-M4",
+            "svdFile": "${workspaceFolder}/vorago/va416xx-base.svd",
+            "preLaunchTask": "cmake: build",
+            "executable": "${workspaceFolder}/build/va416xx-template",
+            "interface": "swd",
+            "runToMain": true,
+        }
+    ]
+}

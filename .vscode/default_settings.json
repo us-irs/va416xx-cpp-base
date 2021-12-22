@@ -1,0 +1,4 @@
+{
+    "cortex-debug.gdbPath.linux": "gdb-multiarch",
+    "cortex-debug.gdbPath.windows": "arm-none-eabi-gdb"
+}
