@@ -31,16 +31,20 @@
    POSSIBILITY OF SUCH DAMAGE.
    ---------------------------------------------------------------------------*/
 
+# Adapted for the VA416XX family of MCUs
+
     .thumb
     .syntax	unified
     .cpu cortex-m4
-    .arch	armv7-m
+    .arch	armv7e-m
 
     .section .vectors
     .align	2
     .globl	__Vectors
+    .globl   __Vectors_End
+    .globl   __Vectors_Size
 __Vectors:
-    .long	_stack_start          /* Top of Stack */
+    .long	__StackTop            /* Top of Stack */
     .long	Reset_Handler         /* Reset Handler */
     .long	NMI_Handler           /* NMI Handler */
     .long	HardFault_Handler     /* Hard Fault Handler */
@@ -57,7 +61,7 @@ __Vectors:
     .long	PendSV_Handler        /* PendSV Handler */
     .long	SysTick_Handler       /* SysTick Handler */
 
-    /* External interrupts */
+    # External interrupts
     .long	OC0_IRQHandler        	//   0:  Always 0
     .long	OC1_IRQHandler          //   1:  Always 0
     .long   OC2_IRQHandler       	//   2:  Always 0
@@ -255,7 +259,12 @@ __Vectors:
     .long   FPU_IRQHandler          //  194
     .long   TXEV_IRQHandler         //  195
 
-    .size	__Vectors, . - __Vectors
+    # This was used in the Thales Alenia Startup file. It adds a lot of padding. Not sure this
+    # is necessary, but keep commented version here just in case.
+    # .space   (214 * 4) // Interrupts 10 .. 224 are left out
+__Vectors_End:
+    .equ     __Vectors_Size, __Vectors_End - __Vectors
+    .size    __Vectors, . - __Vectors
 
 	.text
 	.thumb
@@ -263,6 +272,7 @@ __Vectors:
 	.align	2
 	.globl	Reset_Handler
 	.type	Reset_Handler, %function
+	.cfi_startproc
 Reset_Handler:
 
   #ifndef __NO_SYSTEM_INIT
@@ -283,7 +293,6 @@ Reset_Handler:
     b 0b
 1:
 
-
     # Initialise .data memory. `__sdata`, `__sidata`, and `__edata` come from the
     # linker script. Copy from r2 into r0 until r0 reaches r1.
     ldr r0,=_sdata
@@ -299,11 +308,23 @@ Reset_Handler:
     b 2b
 3:
 
-    /* Call static constructors. Important for C++ code. */
+    # Call static constructors. Important for C++ code
     bl __libc_init_array
 
-    bl _start
+    # Calling this is problematic, at least on RevA. The code crashes in this function.
+    # If the issue is fixed and this is used, the calls to __libc_init_array become obsolete.
+    # The startup function also does something that looks like the .bss and .data
+    # initialization so the initializations above might become obsolete as well.
+    # For now, branch to main directly
+    # bl _start
+    bl main
 
+    # Trap on return
+    udf
+
+    .cfi_endproc
+    # See https://www.keil.com/support/man/docs/armasm/armasm_dom1361290018422.htm about the .pool
+    # directive
     .pool
     .size	Reset_Handler, . - Reset_Handler
 
@@ -314,20 +335,16 @@ Reset_Handler:
     .thumb_func
     .weak    HardFault_Handler
     .type    HardFault_Handler, %function
-    .fnstart
 HardFault_Handler:
     b  .
-    .fnend
     .size    HardFault_Handler, . - HardFault_Handler
 
     .align  1
     .thumb_func
     .weak	Default_Handler
     .type	Default_Handler, %function
-    .fnstart
 Default_Handler:
     b	.
-    .fnend
     .size	Default_Handler, . - Default_Handler
 
 /*    Macro to define default handlers. Default handler
@@ -339,7 +356,6 @@ Default_Handler:
     .endm
 
     def_irq_handler	NMI_Handler
-    def_irq_handler	HardFault_Handler
     def_irq_handler	MemManage_Handler
     def_irq_handler	BusFault_Handler
     def_irq_handler	UsageFault_Handler
