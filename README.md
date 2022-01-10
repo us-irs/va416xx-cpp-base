@@ -1,4 +1,4 @@
-C/C++ template project for VA416xx based projects
+C/C++ template project for Vorago VA416xx based projects
 ========
 
 # Prerequisites
