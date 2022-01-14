@@ -91,12 +91,11 @@ SECTIONS
  
     _sidata = .;   
 	
-	.RTTSection : AT ( _sidata )
-	{
+	 .RTTSection : AT ( _sidata ) {
 		. = ALIGN(4);
 		_sdata = .;        		/* create a global symbol at data start */
 		/* Place SEGGER-RTT first at 0x1fff8000 */
-		KEEP(*(.RTTSection)); 
+	/*	KEEP(*(.RTTSection)); */
 	} >RAM
 
   	/* Initialized data sections goes into RAM, load LMA copy after code */
@@ -157,7 +156,6 @@ SECTIONS
         libm.a ( * )
         libgcc.a ( * )
     }
-   
- 
+
     .ARM.attributes 0 : { *(.ARM.attributes) }
 }

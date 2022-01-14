@@ -1,32 +1,32 @@
-
-/****************************************************************************************************/ /**
-                                                                                                        * @file     va416xx.h
-                                                                                                        *
-                                                                                                        * @brief    CMSIS Cortex-M4 Peripheral Access Layer Header File for
-                                                                                                        *           va416xx from VORAGO TECHNOLOGIES.
-                                                                                                        *
-                                                                                                        * @version  V1.3
-                                                                                                        * @date     6. April 2020
-                                                                                                        *
-                                                                                                        * @note     Generated with SVDConv V2.87e
-                                                                                                        *           from CMSIS SVD File 'va416xx.svd' Version 1.3,
-                                                                                                        *
-                                                                                                        * @par      VORAGO Technologies
-                                                                                                        *
-                                                                                                        *           ----------------------------------------------------------------------------
-                                                                                                        *           Copyright (c) 2013-2020 VORAGO Technologies
-                                                                                                        *
-                                                                                                        *           BY DOWNLOADING, INSTALLING OR USING THIS SOFTWARE, YOU AGREE TO BE BOUND BY ALL THE TERMS
-                                                                                                        *           AND CONDITIONS OF THE VORAGO TECHNOLOGIES END USER LICENSE AGREEMENT.
-                                                                                                        *
-                                                                                                        *           THIS SOFTWARE IS PROVIDED "AS IS". NO WARRANTIES, WHETHER EXPRESS, IMPLIED
-                                                                                                        *           OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
-                                                                                                        *           MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
-                                                                                                        *           VORAGO TECHNOLOGIES SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE
-                                                                                                        *           FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
-                                                                                                        *
-                                                                                                        *
-                                                                                                        *******************************************************************************************************/
+/****************************************************************************************************/
+/**
+* @file     va416xx.h
+*
+* @brief    CMSIS Cortex-M4 Peripheral Access Layer Header File for
+*           va416xx from VORAGO TECHNOLOGIES.
+*
+* @version  V1.3
+* @date     6. April 2020
+*
+* @note     Generated with SVDConv V2.87e
+*           from CMSIS SVD File 'va416xx.svd' Version 1.3,
+*
+* @par      VORAGO Technologies
+*
+*           ----------------------------------------------------------------------------
+*           Copyright (c) 2013-2020 VORAGO Technologies
+*
+*           BY DOWNLOADING, INSTALLING OR USING THIS SOFTWARE, YOU AGREE TO BE BOUND BY ALL THE TERMS
+*           AND CONDITIONS OF THE VORAGO TECHNOLOGIES END USER LICENSE AGREEMENT.
+*
+*           THIS SOFTWARE IS PROVIDED "AS IS". NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+*           OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+*           MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+*           VORAGO TECHNOLOGIES SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE
+*           FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+*
+*
+*******************************************************************************************************/
 
 /** @addtogroup VORAGO TECHNOLOGIES
  * @{

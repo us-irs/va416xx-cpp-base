@@ -31,6 +31,10 @@
 #include "va416xx_debug.h"
 #include "va416xx_hal.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*****************************************************************************/
 /* Global pre-processor symbols/macros ('#define')                           */
 /*****************************************************************************/
@@ -110,6 +114,13 @@ extern hal_status_t HAL_I2CM_GetXferStatus(VOR_I2C_Type *const i2c);
 extern hal_status_t HAL_I2CS_Listen(VOR_I2C_Type *const i2c, char *dataPtr, uint16_t maxLen,
                                     uint16_t threshLen);
 extern hal_status_t HAL_I2CS_Respond(VOR_I2C_Type *const i2c, char *dataPtr, uint16_t len);
+
+extern void VOR_I2C0_SL_IRQHandler(void);
+extern void VOR_I2C0_SL_RX_IRQHandler(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 /*****************************************************************************/
 /* End of file                                                               */

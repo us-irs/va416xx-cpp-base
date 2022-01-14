@@ -62,7 +62,7 @@
 /*****************************************************************************/
 
 static en_stdio_t ioOut = en_stdio_none;
-#ifdef ENABLE_RTT
+#ifdef VOR_ENABLE_RTT
 static uint8_t log_buff[100];
 #endif
 
@@ -75,7 +75,7 @@ void VOR_printf(const char *fmt, ...) {
   va_start(args, fmt);
 
   if (ioOut == en_stdio_rtt) {
-#ifdef ENABLE_RTT
+#ifdef VOR_ENABLE_RTT
     vsnprintf((char *)(log_buff), 100, fmt, args);
     SEGGER_RTT_WriteString(0, (const char *)log_buff);
 #endif
@@ -92,7 +92,7 @@ void DBG_printf(const char *fmt, ...) {
   va_start(args, fmt);
 
   if (ioOut == en_stdio_rtt) {
-#ifdef ENABLE_RTT
+#ifdef VOR_ENABLE_RTT
     vsnprintf((char *)(log_buff), 100, fmt, args);
     SEGGER_RTT_WriteString(0, "DEBUG: ");
     SEGGER_RTT_WriteString(0, (const char *)log_buff);
@@ -111,7 +111,7 @@ void DBG_println(const char *fmt, ...) {
   va_start(args, fmt);
 
   if (ioOut == en_stdio_rtt) {
-#ifdef ENABLE_RTT
+#ifdef VOR_ENABLE_RTT
     vsnprintf((char *)(log_buff), 100, fmt, args);
     SEGGER_RTT_WriteString(0, "DEBUG: ");
     SEGGER_RTT_WriteString(0, (const char *)log_buff);
@@ -156,7 +156,7 @@ void DBG_SetStdioOutput(en_stdio_t io) {
       VOR_GPIO->BANK[3].PULSE |= 0x00000080U;
       break;
     case en_stdio_rtt:
-#ifdef ENABLE_RTT
+#ifdef VOR_ENABLE_RTT
       SEGGER_RTT_Init();
       SEGGER_RTT_ConfigUpBuffer(0, NULL, NULL, 0, SEGGER_RTT_MODE_NO_BLOCK_SKIP);
 #endif
@@ -212,7 +212,7 @@ int fputc(int c, FILE *fPointer) {
       VOR_GPIO->BANK[3].DATAMASK = dm;
       break;
     case en_stdio_rtt:
-#ifdef ENABLE_RTT
+#ifdef VOR_ENABLE_RTT
       SEGGER_RTT_PutChar(0, (uint8_t)c);
 #endif
       break;

@@ -33,8 +33,12 @@
 
 #include "VORConfig.h"
 
-#ifdef ENABLE_RTT
+#ifdef VOR_ENABLE_RTT
 #include "segger_rtt.h"
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 /*****************************************************************************/
@@ -101,6 +105,10 @@ extern void DBG_printf(const char *fmt, ...);   // prints "DEBUG: " before the m
 extern void DBG_println(const char *fmt, ...);  // prints "DEBUG: " before the msg
 extern void DBG_SetStdioOutput(en_stdio_t io);
 extern en_stdio_t DBG_GetStdioOutput(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 /*****************************************************************************/
 /* End of file                                                               */

@@ -1269,8 +1269,8 @@ extern hal_status_t HAL_I2CS_Respond(VOR_I2C_Type *const i2c, char *dataPtr, uin
  ** @brief  I2C0 slave mode IRQ handler
  **
  ******************************************************************************/
-void I2C0_SL_IRQHandler(void) __attribute__((weak));
-void I2C0_SL_IRQHandler(void) {
+//void I2C0_SL_IRQHandler(void) __attribute__((weak));
+void VOR_I2C0_SL_IRQHandler(void) {
   volatile uint8_t junk = 0;
   (void)junk;
 
@@ -1327,10 +1327,10 @@ void I2C0_SL_IRQHandler(void) {
   }
 }
 
-void I2C0_SL_RX_IRQHandler(void) __attribute__((weak));
-void I2C0_SL_RX_IRQHandler(void) { I2C0_SL_IRQHandler(); }
+//void I2C0_SL_RX_IRQHandler(void) __attribute__((weak));
+void VOR_I2C0_SL_RX_IRQHandler(void) { VOR_I2C0_SL_IRQHandler(); }
 void I2C0_SL_TX_IRQHandler(void) __attribute__((weak));
-void I2C0_SL_TX_IRQHandler(void) { I2C0_SL_IRQHandler(); }
+void I2C0_SL_TX_IRQHandler(void) { VOR_I2C0_SL_IRQHandler(); }
 
 /*******************************************************************************
  **

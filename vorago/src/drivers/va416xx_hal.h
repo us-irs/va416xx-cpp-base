@@ -33,6 +33,10 @@
 
 #include "va416xx.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*****************************************************************************/
 /* Global pre-processor symbols/macros ('#define')                           */
 /*****************************************************************************/
@@ -92,6 +96,10 @@ extern const char *HAL_StatusToString(hal_status_t stat);
 
 // define this in your project somewhere
 extern void OnSystemClockChanged(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 /*****************************************************************************/
 /* End of file                                                               */
