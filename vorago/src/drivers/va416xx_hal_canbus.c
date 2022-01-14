@@ -181,11 +181,11 @@ void HAL_Can_Disable(uint32_t CANPortNum) {
   VOR_CAN->BANK[CANPortNum].CGCR = CAN_CGCR_BUFFLOCK_Msk | CAN_CGCR_TSTPEN_Msk | CAN_CGCR_DDIR_Msk |
                                    CAN_CGCR_LO_Msk | CAN_CGCR_LOOPBACK_Msk | CAN_CGCR_INTERNAL_Msk |
                                    CAN_CGCR_DIAGEN_Msk | CAN_CGCR_EIT_Msk;
-  //  	  CAN_CGCR_CANEN_Msk     \
+/*  	  CAN_CGCR_CANEN_Msk     \
 //		| CAN_CGCR_CRX_Msk       \
 //		| CAN_CGCR_CTX_Msk       \
 //		| CAN_CGCR_IGNACK_Msk
-
+*/
   //  VOR_UART->BANK[ch].IRQ_ENB = 0x00;
   //	VOR_UART->BANK[ch].ENABLE = 0x00;
 }

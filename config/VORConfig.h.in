@@ -13,4 +13,9 @@
 #cmakedefine NVM_BINARY_1
 #cmakedefine NVM_BINARY_2
 
+// Expected VREF voltage
+#define ADC_VREF         (3.3f)
+// DAC channel to use for ADC calibration
+#define ADC_CAL_DAC      (VOR_DAC0)
+
 #endif /* MISSION_POWER_CONFIG_VORCONFIG_H_ */

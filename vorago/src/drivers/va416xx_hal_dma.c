@@ -54,6 +54,11 @@ static stc_dma_control_blk_t dma_blk __attribute__((section(".ARM.__at_0x2000000
 /** Default DMA control block, 0x20000000 - 0x2000007f (IAR) */
 static stc_dma_control_blk_t dma_blk __attribute__((section(".ARM.__at_0x20000000")));
 
+#elif defined ( __GNUC__ ) /* GNU Compiler */
+
+// Explicit placement using linker script
+static stc_dma_control_blk_t dma_blk __attribute__((section(".dma_blk")));
+
 #endif
 
 /*****************************************************************************/

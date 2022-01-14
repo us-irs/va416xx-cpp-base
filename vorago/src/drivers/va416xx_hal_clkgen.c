@@ -193,9 +193,9 @@ hal_status_t HAL_Clkgen_Init(hal_clkgen_init_t clkConfig) {
         clkConfig.pll_out_mhz = PLLOUT_MAX_MHZ;
       }
       if (clkConfig.xtalsel == hal_xtalsel_xtal_en) {
-        pllInFreq = XTAL;
+        pllInFreq = VOR_XTAL;
       } else {
-        pllInFreq = EXTCLK;
+        pllInFreq = VOR_EXTCLK;
       }
       if (calcPLL(pllInFreq, clkConfig.pll_out_mhz * ONE_MHZ) != 0) {
         return hal_status_initError;

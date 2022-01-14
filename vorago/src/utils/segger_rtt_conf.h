@@ -116,7 +116,11 @@ Revision: $Rev: 21386 $
 #endif
 
 #ifndef SEGGER_RTT_SECTION
+#if (defined __GNUC__)
+#define SEGGER_RTT_SECTION ".RTTSection"
+#else
 #define SEGGER_RTT_SECTION ".ARM.__at_0x1ffff000"
+#endif
 #endif
 
 /*********************************************************************

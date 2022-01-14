@@ -1079,7 +1079,9 @@ void I2C1_MS_IRQHandler(void) {
     }
   }
 }
+void I2C1_MS_RX_IRQHandler(void) __attribute__((weak));
 void I2C1_MS_RX_IRQHandler(void) { I2C1_MS_IRQHandler(); }
+void I2C1_MS_TX_IRQHandler(void) __attribute__((weak));
 void I2C1_MS_TX_IRQHandler(void) { I2C1_MS_IRQHandler(); }
 
 /*******************************************************************************
@@ -1324,7 +1326,10 @@ void I2C0_SL_IRQHandler(void) {
     }
   }
 }
+
+void I2C0_SL_RX_IRQHandler(void) __attribute__((weak));
 void I2C0_SL_RX_IRQHandler(void) { I2C0_SL_IRQHandler(); }
+void I2C0_SL_TX_IRQHandler(void) __attribute__((weak));
 void I2C0_SL_TX_IRQHandler(void) { I2C0_SL_IRQHandler(); }
 
 /*******************************************************************************

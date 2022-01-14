@@ -23,6 +23,7 @@ MEMORY
 {
 	ROM (rx)        : ORIGIN = 0x00000000, LENGTH = 256K
 	RAM (xrw)       : ORIGIN = 0x1FFF8000, LENGTH = 32K
+	SRAM1 (xrw)     : ORIGIN = 0x20000000, LENGTH = 32K
 }
  
 /* define stack size and heap size here */
@@ -94,12 +95,12 @@ SECTIONS
 	{
 		. = ALIGN(4);
 		_sdata = .;        		/* create a global symbol at data start */
-		/* Place SEGGER-RTT first at 0x10000000 */
+		/* Place SEGGER-RTT first at 0x1fff8000 */
 		KEEP(*(.RTTSection)); 
 	} >RAM
-	
+
   	/* Initialized data sections goes into RAM, load LMA copy after code */
-  	.data : AT ( _sidata + SIZEOF(.RTTSection) ) 
+    .data : AT ( _sidata + SIZEOF(.RTTSection) )
   	{
     	. = ALIGN(4);
     	*(.data)           		/* .data sections */
@@ -137,10 +138,17 @@ SECTIONS
     
     /* Place symbol at heap end */
     _eheap_ = 0x1fff5000;
-    _sstack = 0x1fff8000;
+    _sstack = 0x20000000;
     /* This symbol is used by the start-up file ! */
     __StackTop = _sstack;
-    
+
+    .dma_sec (NOLOAD) :
+    {
+        . = ALIGN(4);
+        /* Place DMA block at start of SRAM1 */
+        KEEP(*(.dma_blk));
+    } >SRAM1
+
     /* Remove information from the standard libraries */
 
     /DISCARD/ :
