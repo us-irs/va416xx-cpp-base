@@ -22,15 +22,37 @@
  * limitations under the License.
  */
 
-#include "core_cm4.h"
+#include "hardFault_handler.h"
+
 #include "va416xx_debug.h"
 #include "va416xx_hal.h"
 
 #ifdef __CC_ARM
+
 // in hardFault_handler.s
 extern void hfhandler_asm(void);
+void VOREXC_HardFault_Handler(void) { hfhandler_asm(); }
 
-void HardFault_Handler(void) { hfhandler_asm(); }
+#elif defined(__GNUC__)
+
+// Taken from https://www.freertos.org/Debugging-Hard-Faults-On-Cortex-M-Microcontrollers.html
+
+/* The prototype shows it is a naked function - in effect this is just an
+assembly function. */
+void VOREXC_HardFault_Handler(void) __attribute__((naked));
+
+/* The fault handler implementation calls a function called
+prvGetRegistersFromStack(). */
+void VOREXC_HardFault_Handler(void) {
+  __asm volatile(
+      " tst lr, #4                                                \n"
+      " ite eq                                                    \n"
+      " mrseq r0, msp                                             \n"
+      " mrsne r0, psp                                             \n"
+      " mov r1,lr                                                 \n"
+      " b HardFault_Handler_C                                     \n");
+}
+
 #endif
 
 // HardFault handler in C, with stack frame location and LR value extracted

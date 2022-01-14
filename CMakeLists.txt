@@ -36,6 +36,10 @@ set(VOR_EXTCLK 10000000UL)
 
 option(BOARD_REVA "Use board revision A. Not recommended for development with GCC" OFF)
 option(VOR_ENABLE_RTT "Enable RTT logger" ON)
+option(VOR_FRAM_USE_HAL_DRIVER "Use Vorago HAL for the FRAM" ON)
+option(GCC_USE_SEGGER_SYSCALLS
+    "Use SEGGER syscall implementations. Reroutes printf output to RTT" ON
+)
 
 set(LINK_SCRIPTS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vorago/linker")
 set(LINKER_SCRIPT_REGULAR ${LINK_SCRIPTS_PATH}/va416xx_linker.ld)

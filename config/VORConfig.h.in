@@ -4,11 +4,14 @@
 #include "va416xx.h"
 
 #cmakedefine VOR_VERBOSE_LEVEL @VOR_VERBOSE_LEVEL@
-
 #cmakedefine01 VOR_ENABLE_RTT
+
+// Clock settings
 #cmakedefine VOR_XTAL @VOR_XTAL@
 #cmakedefine VOR_HBO @VOR_HBO@
 #cmakedefine VOR_EXTCLK @VOR_EXTCLK@
+
+#cmakedefine VOR_FRAM_USE_HAL_DRIVER
 
 // Expected VREF voltage
 #define ADC_VREF         (3.3f)

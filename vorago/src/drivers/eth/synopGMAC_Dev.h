@@ -689,12 +689,12 @@ enum GmacInterruptStatusBitDefinition {
   GmacTSIntSts = 0x00000200, /* set if int generated due to TS (Read Time Stamp Status Register to
                                 know details)*/
   GmacMmcRxChksumOffload =
-      0x00000080,                 /* set if int generated in MMC RX CHECKSUM OFFLOAD int register                 */
-  GmacMmcTxIntSts = 0x00000040,   /* set if int generated in MMC TX Int register   */
-  GmacMmcRxIntSts = 0x00000020,   /* set if int generated in MMC RX Int register   */
-  GmacMmcIntSts = 0x00000010,     /* set if any of the above bit [7:5] is set     */
-  GmacPmtIntSts = 0x00000008,     /* set whenver magic pkt/wake-on-lan frame is received     */
-  GmacPcsAnComplete = 0x00000004, /* set when AN is complete in TBI/RTBI/SGMIII phy interface */
+      0x00000080, /* set if int generated in MMC RX CHECKSUM OFFLOAD int register                 */
+  GmacMmcTxIntSts = 0x00000040,     /* set if int generated in MMC TX Int register   */
+  GmacMmcRxIntSts = 0x00000020,     /* set if int generated in MMC RX Int register   */
+  GmacMmcIntSts = 0x00000010,       /* set if any of the above bit [7:5] is set     */
+  GmacPmtIntSts = 0x00000008,       /* set whenver magic pkt/wake-on-lan frame is received     */
+  GmacPcsAnComplete = 0x00000004,   /* set when AN is complete in TBI/RTBI/SGMIII phy interface */
   GmacPcsLnkStsChange = 0x00000002, /* set if any lnk status change in TBI/RTBI/SGMII interface */
   GmacRgmiiIntSts = 0x00000001,     /* set if any change in lnk status of RGMII interface     */
 
@@ -860,11 +860,11 @@ enum DmaStatusReg {
   DmaErrorBit0 =
       0x00800000, /* (EB)Error bits 0-Rx DMA, 1-Tx DMA                  23     RO       0       */
 
-  DmaTxState = 0x00700000,     /* (TS)Transmit process state                         22:20  RO     */
-  DmaTxStopped = 0x00000000,   /* Stopped - Reset or Stop Tx Command issued   000      */
-  DmaTxFetching = 0x00100000,  /* Running - fetching the Tx descriptor  */
-  DmaTxWaiting = 0x00200000,   /* Running - waiting for status   */
-  DmaTxReading = 0x00300000,   /* Running - reading the data from host memory   */
+  DmaTxState = 0x00700000,    /* (TS)Transmit process state                         22:20  RO     */
+  DmaTxStopped = 0x00000000,  /* Stopped - Reset or Stop Tx Command issued   000      */
+  DmaTxFetching = 0x00100000, /* Running - fetching the Tx descriptor  */
+  DmaTxWaiting = 0x00200000,  /* Running - waiting for status   */
+  DmaTxReading = 0x00300000,  /* Running - reading the data from host memory   */
   DmaTxSuspended = 0x00600000, /* Suspended - Tx Descriptor unavailabe */
   DmaTxClosing = 0x00700000,   /* Running - closing Rx descriptor   */
 
@@ -961,10 +961,10 @@ enum DmaControlReg {
   DmaRxFlowCtrlAct7K =
       0x00800400, /* (RFA)Rx flow control Act. threhold (7kbytes)    [23]:10:09   RW */
 
-  DmaRxThreshCtrl = 0x00000018,    /* (RTC)Controls thre Threh of MTL rx Fifo          4:3   RW    */
-  DmaRxThreshCtrl64 = 0x00000000,  /* (RTC)Controls thre Threh of MTL tx Fifo 64       4:3   RW  */
-  DmaRxThreshCtrl32 = 0x00000008,  /* (RTC)Controls thre Threh of MTL tx Fifo 32       4:3   RW  */
-  DmaRxThreshCtrl96 = 0x00000010,  /* (RTC)Controls thre Threh of MTL tx Fifo 96       4:3   RW  */
+  DmaRxThreshCtrl = 0x00000018,   /* (RTC)Controls thre Threh of MTL rx Fifo          4:3   RW    */
+  DmaRxThreshCtrl64 = 0x00000000, /* (RTC)Controls thre Threh of MTL tx Fifo 64       4:3   RW  */
+  DmaRxThreshCtrl32 = 0x00000008, /* (RTC)Controls thre Threh of MTL tx Fifo 32       4:3   RW  */
+  DmaRxThreshCtrl96 = 0x00000010, /* (RTC)Controls thre Threh of MTL tx Fifo 96       4:3   RW  */
   DmaRxThreshCtrl128 = 0x00000018, /* (RTC)Controls thre Threh of MTL tx Fifo 128      4:3   RW */
 
   DmaEnHwFlowCtrl = 0x00000100,  /* (EFC)Enable HW flow control                      8       RW  */
@@ -1101,8 +1101,7 @@ enum DmaDescriptorStatus /* status word of DMA descriptor */
 
   DescDAFilterFail = 0x40000000, /* (AFM)Rx - DA Filter Fail for the rx frame           30 */
 
-  DescFrameLengthMask =
-      0x3FFF0000, /* (FL)Receive descriptor frame length                 29:16 */
+  DescFrameLengthMask = 0x3FFF0000, /* (FL)Receive descriptor frame length                 29:16 */
   DescFrameLengthShift = 16,
 
   DescError = 0x00008000, /* (ES)Error summary bit  - OR of the follo. bits:     15 */
@@ -1120,24 +1119,23 @@ enum DmaDescriptorStatus /* status word of DMA descriptor */
   DescRxWatchdog = 0x00000010,    /* (RWT)Rx - watchdog timer expired during reception   4    */
   DescRxMiiError = 0x00000008,    /* (RE)Rx - error reported by MII interface            3    */
   DescRxDribbling = 0x00000004,   /* (DE)Rx - frame contains non int multiple of 8 bits  2   */
-  DescRxCrc = 0x00000002,         /* (CE)Rx - CRC error                                  1         */
+  DescRxCrc = 0x00000002, /* (CE)Rx - CRC error                                  1         */
   //  DescRxMacMatch        = 0x00000001,   /* (RX MAC Address) Rx mac address reg(1 to 15)match   0
   //  */
 
   DescRxEXTsts = 0x00000001, /* Extended Status Available (RDES4)                           0 */
 
-  DescTxIntEnable = 0x40000000,   /* (IC)Tx - interrupt on completion                    30   */
-  DescTxLast = 0x20000000,        /* (LS)Tx - Last segment of the frame                  29        */
-  DescTxFirst = 0x10000000,       /* (FS)Tx - First segment of the frame                 28       */
-  DescTxDisableCrc = 0x08000000,  /* (DC)Tx - Add CRC disabled (first segment only)      27  */
+  DescTxIntEnable = 0x40000000,  /* (IC)Tx - interrupt on completion                    30   */
+  DescTxLast = 0x20000000,       /* (LS)Tx - Last segment of the frame                  29        */
+  DescTxFirst = 0x10000000,      /* (FS)Tx - First segment of the frame                 28       */
+  DescTxDisableCrc = 0x08000000, /* (DC)Tx - Add CRC disabled (first segment only)      27  */
   DescTxDisablePadd = 0x04000000, /* (DP)disable padding, added by - reyaz               26 */
 
   DescTxCisMask = 0x00c00000, /* Tx checksum offloading control mask		       23:22
                                */
   DescTxCisBypass =
-      0x00000000, /* Checksum bypass								*/
-  DescTxCisIpv4HdrCs =
-      0x00400000, /* IPv4 header checksum */
+      0x00000000,                  /* Checksum bypass								*/
+  DescTxCisIpv4HdrCs = 0x00400000, /* IPv4 header checksum */
   DescTxCisTcpOnlyCs =
       0x00800000, /* TCP/UDP/ICMP checksum. Pseudo header checksum is assumed to be present	*/
   DescTxCisTcpPseudoCs =
@@ -1153,8 +1151,8 @@ enum DmaDescriptorStatus /* status word of DMA descriptor */
   DescRxTSavail = 0x00000080,   /* Time stamp available                                7   */
   DescRxFrameType = 0x00000020, /* (FT)Rx - Frame type - Ethernet, otherwise 802.3     5 */
 
-  DescTxIpv4ChkError = 0x00010000,  /* (IHE) Tx Ip header error                            16  */
-  DescTxTimeout = 0x00004000,       /* (JT)Tx - Transmit jabber timeout                    14       */
+  DescTxIpv4ChkError = 0x00010000, /* (IHE) Tx Ip header error                            16  */
+  DescTxTimeout = 0x00004000, /* (JT)Tx - Transmit jabber timeout                    14       */
   DescTxFrameFlushed = 0x00002000,  /* (FF)Tx - DMA/MTL flushed the frame due to SW flush  13  */
   DescTxPayChkError = 0x00001000,   /* (PCE) Tx Payload checksum Error                     12   */
   DescTxLostCarrier = 0x00000800,   /* (LC)Tx - carrier lost during tramsmission           11   */
@@ -1205,11 +1203,11 @@ This explains the RDES4 Extended Status bits layout
 
 #endif
 
-  DescRxPtpAvail = 0x00004000,     /* PTP snapshot available                              14     */
-  DescRxPtpVer = 0x00002000,       /* When set indicates IEEE1584 Version 2 (else Ver1)   13       */
+  DescRxPtpAvail = 0x00004000, /* PTP snapshot available                              14     */
+  DescRxPtpVer = 0x00002000,   /* When set indicates IEEE1584 Version 2 (else Ver1)   13       */
   DescRxPtpFrameType = 0x00001000, /* PTP frame type Indicates PTP sent over ethernet     12 */
   DescRxPtpMessageType =
-      0x00000F00,                  /* Message Type                                        11:8                  */
+      0x00000F00, /* Message Type                                        11:8                  */
   DescRxPtpNo = 0x00000000,        /* 0000 => No PTP message received        */
   DescRxPtpSync = 0x00000100,      /* 0001 => Sync (all clock types) received      */
   DescRxPtpFollowUp = 0x00000200,  /* 0010 => Follow_Up (all clock types) received  */
@@ -1221,8 +1219,8 @@ This explains the RDES4 Extended Status bits layout
                                        and Bound clk   */
   DescRxPtpPdelayRespFP = 0x00000700, /* 0111 => Pdealy_Resp_Follow_Up (in P to P trans clk) or
                                          Signaling in Ord and Bound clk   */
-  DescRxPtpIPV6 = 0x00000080,         /* Received Packet is  in IPV6 Packet                  7         */
-  DescRxPtpIPV4 = 0x00000040,         /* Received Packet is  in IPV4 Packet                  6         */
+  DescRxPtpIPV6 = 0x00000080, /* Received Packet is  in IPV6 Packet                  7         */
+  DescRxPtpIPV4 = 0x00000040, /* Received Packet is  in IPV4 Packet                  6         */
 
   DescRxChkSumBypass = 0x00000020,     /* When set indicates checksum offload engine          5
                                           is bypassed     */
@@ -1296,12 +1294,12 @@ enum DmaDescriptorStatus /* status word of DMA descriptor */
   DescRxChkBit7 = 0x00000080, /* (IPC CS ERROR)Rx - Ipv4 header checksum error      7 */
   DescRxChkBit5 = 0x00000020, /* (FT)Rx - Frame type - Ethernet, otherwise 802.3    5 */
 
-  DescTxIpv4ChkError = 0x00010000,  /* (IHE) Tx Ip header error                           16  */
-  DescTxTimeout = 0x00004000,       /* (JT)Tx - Transmit jabber timeout                   14       */
-  DescTxFrameFlushed = 0x00002000,  /* (FF)Tx - DMA/MTL flushed the frame due to SW flush 13  */
-  DescTxPayChkError = 0x00001000,   /* (PCE) Tx Payload checksum Error                    12   */
-  DescTxLostCarrier = 0x00000800,   /* (LC)Tx - carrier lost during tramsmission          11   */
-  DescTxNoCarrier = 0x00000400,     /* (NC)Tx - no carrier signal from the tranceiver     10     */
+  DescTxIpv4ChkError = 0x00010000, /* (IHE) Tx Ip header error                           16  */
+  DescTxTimeout = 0x00004000,      /* (JT)Tx - Transmit jabber timeout                   14       */
+  DescTxFrameFlushed = 0x00002000, /* (FF)Tx - DMA/MTL flushed the frame due to SW flush 13  */
+  DescTxPayChkError = 0x00001000,  /* (PCE) Tx Payload checksum Error                    12   */
+  DescTxLostCarrier = 0x00000800,  /* (LC)Tx - carrier lost during tramsmission          11   */
+  DescTxNoCarrier = 0x00000400,    /* (NC)Tx - no carrier signal from the tranceiver     10     */
   DescTxLateCollision = 0x00000200, /* (LC)Tx - transmission aborted due to collision      9 */
   DescTxExcCollisions = 0x00000100, /* (EC)Tx - transmission aborted after 16 collisions   8 */
   DescTxVLANFrame = 0x00000080,     /* (VF)Tx - VLAN-type frame                            7     */
@@ -1345,9 +1343,8 @@ enum DmaDescriptorStatus /* status word of DMA descriptor */
   DescTxCisMask = 0x18000000, /* Tx checksum offloading control mask			28:27
                                */
   DescTxCisBypass =
-      0x00000000, /* Checksum bypass								*/
-  DescTxCisIpv4HdrCs =
-      0x08000000, /* IPv4 header checksum */
+      0x00000000,                  /* Checksum bypass								*/
+  DescTxCisIpv4HdrCs = 0x08000000, /* IPv4 header checksum */
   DescTxCisTcpOnlyCs =
       0x10000000, /* TCP/UDP/ICMP checksum. Pseudo header checksum is assumed to be present	*/
   DescTxCisTcpPseudoCs =
@@ -1527,14 +1524,14 @@ enum MMC_TX {
   GmacMmcTx1024ToMaxOctetsGb = 0x0138, /*Tx with len >1024 bytes <=MaxSize excl. of pre and retried
                                           (Good or Bad)		*/
 
-  GmacMmcTxUcFramesGb = 0x013C, /*Unicast Frames Tx 					 (Good or Bad)
-                                 */
-  GmacMmcTxMcFramesGb = 0x0140, /*Multicast Frames Tx				   (Good and Bad)
-                                 */
-  GmacMmcTxBcFramesGb = 0x0144, /*Broadcast Frames Tx 				   (Good and Bad)
-                                 */
-  GmacMmcTxUnderFlowError =
-      0x0148,                   /*Frames aborted due to Underflow error                   */
+  GmacMmcTxUcFramesGb =
+      0x013C,                       /*Unicast Frames Tx 					 (Good or Bad)
+                                     */
+  GmacMmcTxMcFramesGb = 0x0140,     /*Multicast Frames Tx				   (Good and Bad)
+                                     */
+  GmacMmcTxBcFramesGb = 0x0144,     /*Broadcast Frames Tx 				   (Good and Bad)
+                                     */
+  GmacMmcTxUnderFlowError = 0x0148, /*Frames aborted due to Underflow error                   */
   GmacMmcTxSingleColG = 0x014C, /*Successfully Tx Frames after singel collision in Half duplex mode
                                  */
   GmacMmcTxMultiColG = 0x0150,  /*Successfully Tx Frames after more than singel collision in Half
@@ -1620,19 +1617,17 @@ enum MMC_IP_RELATED {
   GmacMmcRxIpcIntr =
       0x0208, /*Maintains the interrupt that rx IPC statistic counters generate			*/
 
-  GmacMmcRxIpV4FramesG =
-      0x0210,                             /*Good IPV4 datagrams received                             */
-  GmacMmcRxIpV4HdrErrFrames = 0x0214,     /*Number of IPV4 datagrams received with header errors
-                                           */
-  GmacMmcRxIpV4NoPayFrames = 0x0218,      /*Number of IPV4 datagrams received which didnot have
-                                             TCP/UDP/ICMP payload		*/
-  GmacMmcRxIpV4FragFrames = 0x021C,       /*Number of IPV4 datagrams received with fragmentation
-                                           */
+  GmacMmcRxIpV4FramesG = 0x0210,      /*Good IPV4 datagrams received                             */
+  GmacMmcRxIpV4HdrErrFrames = 0x0214, /*Number of IPV4 datagrams received with header errors
+                                       */
+  GmacMmcRxIpV4NoPayFrames = 0x0218,  /*Number of IPV4 datagrams received which didnot have
+                                         TCP/UDP/ICMP payload		*/
+  GmacMmcRxIpV4FragFrames = 0x021C,   /*Number of IPV4 datagrams received with fragmentation
+                                       */
   GmacMmcRxIpV4UdpChkDsblFrames = 0x0220, /*Number of IPV4 datagrams received that had a UDP payload
                                              checksum disabled		*/
 
-  GmacMmcRxIpV6FramesG =
-      0x0224,                         /*Good IPV6 datagrams received                         */
+  GmacMmcRxIpV6FramesG = 0x0224,      /*Good IPV6 datagrams received                         */
   GmacMmcRxIpV6HdrErrFrames = 0x0228, /*Number of IPV6 datagrams received with header errors
                                        */
   GmacMmcRxIpV6NoPayFrames = 0x022C,  /*Number of IPV6 datagrams received which didnot have
@@ -1934,8 +1929,8 @@ enum GmacTSControlReg {
   GmacTSENA = 0x00000001, /* Time Stamp Enable                    0             RW         0     */
 };
 
-/*  GmacTSSubSecIncr     	  = 0x0704,   8 bit value by which sub second register is incremented
- * : only when IEEE 1588 time stamping without external timestamp input */
+/*  GmacTSSubSecIncr     	  = 0x0704,   8 bit value by which sub second register is
+ * incremented : only when IEEE 1588 time stamping without external timestamp input */
 enum GmacTSSubSecIncrReg {
   GmacSSINCMsk =
       0x000000FF, /* Only Lower 8 bits are valid bits     7:0           RW         00    */
@@ -1973,10 +1968,10 @@ enum GmacTSStatusReg {
 /* GmacAvMacCtrl            = 0x0738,   AV mac control Register  */
 #ifdef AVB_SUPPORT
 enum GmacAvMacCtrlReg {
-  GmacAvCtrlCh = 0x03000000,   /* Channel on which AV control packets to be received   25:24  RW   0
-                                */
-  GmacPtpCh = 0x00180000,      /* Channel on which PTP packets to be received      20:19  RW   0    */
-  GmacAvPrio = 0x00070000,     /* Priority tag value for AV Packets     18:16  RW   4    */
+  GmacAvCtrlCh = 0x03000000, /* Channel on which AV control packets to be received   25:24  RW   0
+                              */
+  GmacPtpCh = 0x00180000,    /* Channel on which PTP packets to be received      20:19  RW   0    */
+  GmacAvPrio = 0x00070000,   /* Priority tag value for AV Packets     18:16  RW   4    */
   GmacAvTypeMask = 0x0000FFFF, /* Ethernet Type value to be used for comparing and detecting AV
                                   packet 15:0   RW   0    */
 };

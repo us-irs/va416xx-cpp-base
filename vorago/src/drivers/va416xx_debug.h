@@ -64,7 +64,7 @@ extern "C" {
 #endif
 
 /** Debug print */
-#ifdef DEBUG_PRINTS
+#if VOR_VERBOSE_LEVEL >= 1
 #define dbgprintf(...) DBG_printf(__VA_ARGS__)
 #define dbgprintln(...) DBG_println(__VA_ARGS__)
 #else

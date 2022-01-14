@@ -1962,9 +1962,8 @@ s32 synopGMAC_set_rx_qptr(synopGMACdevice *gmacdev, u32 Buffer1, u32 Length1, u3
 s32 synopGMAC_get_rx_qptr(synopGMACdevice *gmacdev, u32 *Status, u32 *Buffer1, u32 *Length1,
                           u32 *Data1, u32 *Buffer2, u32 *Length2, u32 *Data2, u32 *Ext_Status,
                           u32 *Time_Stamp_High, u32 *Time_Stamp_Low) {
-  u32 rxnext =
-      gmacdev->RxBusy;  // index of descriptor the DMA just completed. May be useful when data
-                        // is spread over multiple buffers/descriptors
+  u32 rxnext = gmacdev->RxBusy;  // index of descriptor the DMA just completed. May be useful when
+                                 // data is spread over multiple buffers/descriptors
   DmaDesc *rxdesc = gmacdev->RxBusyDesc;
   if (synopGMAC_is_desc_owned_by_dma(rxdesc)) return -1;
   if (synopGMAC_is_desc_empty(rxdesc)) return -1;
@@ -2020,9 +2019,8 @@ s32 synopGMAC_get_rx_qptr(synopGMACdevice *gmacdev, u32 *Status, u32 *Buffer1, u
  */
 s32 synopGMAC_get_rx_qptr(synopGMACdevice *gmacdev, u32 *Status, u32 *Buffer1, u32 *Length1,
                           u32 *Data1, u32 *Buffer2, u32 *Length2, u32 *Data2) {
-  u32 rxnext =
-      gmacdev->RxBusy;  // index of descriptor the DMA just completed. May be useful when data
-                        // is spread over multiple buffers/descriptors
+  u32 rxnext = gmacdev->RxBusy;  // index of descriptor the DMA just completed. May be useful when
+                                 // data is spread over multiple buffers/descriptors
   DmaDesc *rxdesc = gmacdev->RxBusyDesc;
   if (synopGMAC_is_desc_owned_by_dma(rxdesc)) return -1;
   if (synopGMAC_is_desc_empty(rxdesc)) return -1;

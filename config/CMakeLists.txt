@@ -1,5 +1,6 @@
 target_sources(${TARGET_NAME} PRIVATE
-    overrideWeak.cpp
+    irq.cpp
+    fault.cpp
     event_handler_index.h
 )
 

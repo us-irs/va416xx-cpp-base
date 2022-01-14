@@ -6,6 +6,14 @@ target_sources(${TARGET_NAME} PRIVATE
     circular_buffer.c
     segger_rtt.c
     segger_rtt_printf.c
+    hardFault_handler.c
     utils.c
-    segger_rtt_syscalls_gcc.c
+    spi_fram.c
+    vectrst.c
 )
+
+if(GCC_USE_SEGGER_SYSCALLS)
+    target_sources(${TARGET_NAME} PRIVATE
+        segger_rtt_syscalls_gcc.c
+    )
+endif()

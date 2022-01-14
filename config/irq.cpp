@@ -1,4 +1,8 @@
-#include "va416xx_hal_i2c.h"
+// It is assumed that no interrupts are used for a basic application.
+// The user can call the default interrupt handlers written by Vorago here or
+// call a customized one.
+
+// The interrupts listed here are the ones where Vorago has provided an implementation
 
 extern "C" {
 

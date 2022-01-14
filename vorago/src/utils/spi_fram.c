@@ -25,7 +25,9 @@
 /*****************************************************************************/
 
 #include "spi_fram.h"
-#ifdef USE_HAL_DRIVER
+
+#include "VORConfig.h"
+#ifdef VOR_FRAM_USE_HAL_DRIVER
 #include "va416xx_hal_spi.h"
 #endif
 
@@ -50,7 +52,7 @@
 #define MID_ADDR_BYTE(addr) ((uint8_t)((addr & ADDR_MID_MASK) >> 8))
 #define LSB_ADDR_BYTE(addr) ((uint8_t)(addr & ADDR_LSB_MASK))
 
-#ifndef USE_HAL_DRIVER
+#ifndef VOR_FRAM_USE_HAL_DRIVER
 #define HAL_SPI_VERSION (0x00000300)  // 0.3.0
 
 #define NUM_SPI_BANKS (4)
@@ -123,7 +125,7 @@ hal_status_t FRAM_Init(uint8_t spiBank, uint8_t csNum) {
     return hal_status_badParam;
   }
 
-#ifdef USE_HAL_DRIVER
+#ifdef VOR_FRAM_USE_HAL_DRIVER
   // using HAL driver
   hal_spi_init_t init;
   init.blockmode = true;
@@ -179,8 +181,8 @@ hal_status_t FRAM_Write(uint8_t spiBank, uint32_t addr, uint8_t *buf, uint32_t l
     return hal_status_notInitialized;
   }
 
-  uint32_t volatile voidRead;
-
+  uint32_t volatile voidRead = 0;
+  (void)voidRead;
   wait_idle(spiBank);
   VOR_SPI->BANK[spiBank].DATA =
       (uint32_t)FRAM_WREN | SPI_DATA_BMSTART_BMSTOP_Msk;  // Set Write Enable Latch(WEL) bit
@@ -218,7 +220,8 @@ hal_status_t FRAM_Read(uint8_t spiBank, uint32_t addr, uint8_t *buf, uint32_t le
     return hal_status_notInitialized;
   }
 
-  uint32_t volatile voidRead;
+  uint32_t volatile voidRead = 0;
+  (void)voidRead;
   uint32_t i;
 
   wait_idle(spiBank);
@@ -268,7 +271,7 @@ hal_status_t FRAM_UnInit(uint8_t spiBank) {
 
   hal_status_t stat = hal_status_ok;
 
-#ifdef USE_HAL_DRIVER
+#ifdef VOR_FRAM_USE_HAL_DRIVER
   stat = HAL_Spi_DeInit(&VOR_SPI->BANK[spiBank]);
 #else
   VOR_SPI->BANK[spiBank].CTRL1 = 0;
