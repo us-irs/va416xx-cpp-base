@@ -18,7 +18,7 @@ int main(void) {
   VOR_printf("Toggling LED PG5 periodically\n");
   for (;;) {
     GPIO_TOG(VOR_PORTG, 5);
-    for (size_t idx = 0; idx < 10000000; idx++) {
+    for (size_t idx = 0; idx < 5000000; idx++) {
     }
   }
 }
