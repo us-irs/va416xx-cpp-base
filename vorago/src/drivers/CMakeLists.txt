@@ -2,6 +2,9 @@ target_include_directories(${TARGET_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+add_subdirectory(eth)
+add_subdirectory(spw)
+
 target_sources(${TARGET_NAME} PRIVATE
     va416xx_hal.c
     va416xx_hal_uart.c
