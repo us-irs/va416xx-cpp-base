@@ -1,5 +1,6 @@
 target_sources(${TARGET_NAME} PRIVATE
-    event_handler_index.c
+    overrideWeak.cpp
+    event_handler_index.h
 )
 
 target_include_directories(${TARGET_NAME} PRIVATE

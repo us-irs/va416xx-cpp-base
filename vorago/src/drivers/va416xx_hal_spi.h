@@ -151,6 +151,12 @@ extern hal_status_t HAL_Spi_XferDma(VOR_SPI_Type* const spi, spi_xfer_t* xfer);
 // Check for busy
 extern hal_status_t HAL_Spi_IsBusy(VOR_SPI_Type* const spi, bool* busy);
 
+// Default IRQ handlers. Still need to be called by user IRQ definition
+extern void VORIRQ_SPI0_RX_IRQHandler(void);
+extern void VORIRQ_SPI1_RX_IRQHandler(void);
+extern void VORIRQ_SPI2_RX_IRQHandler(void);
+extern void VORIRQ_SPI3_RX_IRQHandler(void);
+
 /*****************************************************************************/
 /* End of file                                                               */
 /*****************************************************************************/

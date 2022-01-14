@@ -40,11 +40,26 @@ set(CMAKE_ASM_FLAGS "-x assembler-with-cpp")
 
 set(ABI_FLAGS
     -mcpu=cortex-m4
-    -specs=nosys.specs 
-    -specs=nano.specs
     -mthumb
     -mfloat-abi=hard
+    -specs=nosys.specs
 )
+
+if(GCC_USE_NANO_LIB)
+    list(APPEND ABI_FLAGS
+        -specs=nano.specs
+    )
+    if(GCC_NANOLIB_SCAN_FLOAT)
+        list(APPEND ABI_FLAGS
+            -Wl,--undefined,_scanf_float
+        )
+    endif()
+    if(GCC_NANOLIB_SCAN_FLOAT)
+        list(APPEND ABI_FLAGS
+            -Wl,--undefined,_printf_float
+        )
+    endif()
+endif()
 
 string (REPLACE ";" " " ABI_FLAGS "${ABI_FLAGS}")
 

@@ -13,6 +13,12 @@ cmake_minimum_required(VERSION 3.13)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+option(GCC_USE_NANO_LIB "Use newlib-nano to reduce code size" OFF)
+if(GCC_USE_NANO_LIB)
+    option(GCC_NANOLIB_SCAN_FLOAT "Allow scanning floats with newlib nano" ON)
+    option(GCC_NANOLIB_PRINT_FLOAT "Allow printing floats with newlib nano" ON)
+endif()
+
 set(CMAKE_SCRIPT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # Set toolchain file which sets cross-compiler and ABI flags
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SCRIPT_PATH}/VA416XXToolchain.cmake")
@@ -28,13 +34,8 @@ set(VOR_XTAL 10000000UL)
 set(VOR_HBO 20000000UL)
 set(VOR_EXTCLK 10000000UL)
 
+option(BOARD_REVA "Use board revision A. Not recommended for development with GCC" OFF)
 option(VOR_ENABLE_RTT "Enable RTT logger" ON)
-option(NVM1 "Generate image which can be flashed to non-volatile memory at position 1" OFF)
-if(NOT NVM1)
-    option(NVM2 "Generate image which can be flashed to non-volatile memory at position 1" OFF)
-endif()
-
-option(VOR_RTT_LOG "Use SEGGER RTT for logging messages" ON)
 
 set(LINK_SCRIPTS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vorago/linker")
 set(LINKER_SCRIPT_REGULAR ${LINK_SCRIPTS_PATH}/va416xx_linker.ld)
@@ -49,14 +50,22 @@ else()
     set(LINKER_SCRIPT ${LINKER_SCRIPT_REGULAR})
 endif()
 
+if(BOARD_REVA)
+    target_compile_definitions(${TARGET_NAME} PRIVATE
+        BOARD_REVA
+    )
+endif()
 set(CONFIG_PATH config)
+set(SRC_PATH src)
+set(VOR_PATH vorago)
 configure_file(${CONFIG_PATH}/VORConfig.h.in VORConfig.h)
 
 # Add executable
 add_executable(${TARGET_NAME})
 
-add_subdirectory(src)
-add_subdirectory(vorago)
+add_subdirectory(${SRC_PATH})
+add_subdirectory(${CONFIG_PATH})
+add_subdirectory(${VOR_PATH})
 
 set(OUTPUT_NAME_VAR ${TARGET_NAME})
 

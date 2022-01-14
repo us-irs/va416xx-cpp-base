@@ -926,17 +926,10 @@ __STATIC_INLINE void SPI_StateMachine(uint32_t bank) {
   }
 }
 
-void SPI0_RX_IRQHandler(void) __attribute__((weak));
-void SPI0_RX_IRQHandler(void) { SPI_StateMachine(SPI0_BANK); }
-
-void SPI1_RX_IRQHandler(void) __attribute__((weak));
-void SPI1_RX_IRQHandler(void) { SPI_StateMachine(SPI1_BANK); }
-
-void SPI2_RX_IRQHandler(void) __attribute__((weak));
-void SPI2_RX_IRQHandler(void) { SPI_StateMachine(SPI2_BANK); }
-
-void SPI3_RX_IRQHandler(void) __attribute__((weak));
-void SPI3_RX_IRQHandler(void) { SPI_StateMachine(SPI3_BANK); }
+void VORIRQ_SPI0_RX_IRQHandler(void) { SPI_StateMachine(SPI0_BANK); }
+void VORIRQ_SPI1_RX_IRQHandler(void) { SPI_StateMachine(SPI1_BANK); }
+void VORIRQ_SPI2_RX_IRQHandler(void) { SPI_StateMachine(SPI2_BANK); }
+void VORIRQ_SPI3_RX_IRQHandler(void) { SPI_StateMachine(SPI3_BANK); }
 
 /*****************************************************************************/
 /* End of file                                                               */

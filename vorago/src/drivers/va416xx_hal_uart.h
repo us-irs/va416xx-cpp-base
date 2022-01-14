@@ -123,6 +123,14 @@ extern hal_status_t HAL_Uart_RxHndlr(
 extern hal_status_t HAL_Uart_SetTXIntCallback(VOR_UART_Type* const uart, eventHandlerIdx_t idx);
 extern hal_status_t HAL_Uart_SetRXIntCallback(VOR_UART_Type* const uart, eventHandlerIdx_t idx);
 
+// Default IRQ handlers. Still need to be called by user IRQ definition
+extern void VORIRQ_UART0_TX_IRQHandler(void);
+extern void VORIRQ_UART0_RX_IRQHandler(void);
+extern void VORIRQ_UART1_TX_IRQHandler(void);
+extern void VORIRQ_UART1_RX_IRQHandler(void);
+extern void VORIRQ_UART2_TX_IRQHandler(void);
+extern void VORIRQ_UART2_RX_IRQHandler(void);
+
 /*****************************************************************************/
 /* End of file                                                               */
 /*****************************************************************************/

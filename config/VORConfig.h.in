@@ -1,17 +1,14 @@
 #ifndef CONFIG_VORCONIG_H
 #define CONFIG_VORCONIG_H
 
-#cmakedefine VOR_VERBOSE_LEVEL @VOR_VERBOSE_LEVEL@
-#cmakedefine VOR_ENABLE_RTT @VOR_ENABLE_RTT@
+#include "va416xx.h"
 
+#cmakedefine VOR_VERBOSE_LEVEL @VOR_VERBOSE_LEVEL@
+
+#cmakedefine01 VOR_ENABLE_RTT
 #cmakedefine VOR_XTAL @VOR_XTAL@
 #cmakedefine VOR_HBO @VOR_HBO@
 #cmakedefine VOR_EXTCLK @VOR_EXTCLK@
-
-#cmakedefine01 VOR_RTT_LOG
-
-#cmakedefine NVM_BINARY_1
-#cmakedefine NVM_BINARY_2
 
 // Expected VREF voltage
 #define ADC_VREF         (3.3f)

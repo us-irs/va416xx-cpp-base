@@ -308,6 +308,7 @@ Reset_Handler:
     b 2b
 3:
 
+#ifdef BOARD_REVA
     # Call static constructors. Important for C++ code
     bl __libc_init_array
 
@@ -318,6 +319,9 @@ Reset_Handler:
     # For now, branch to main directly
     # bl _start
     bl main
+#else
+    bl _start
+#endif
 
     # Trap on return
     udf

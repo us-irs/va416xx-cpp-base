@@ -1,6 +1,9 @@
 C/C++ template project for Vorago VA416xx based projects
 ========
 
+It is recommended to use the RevB of the VA416xx chips, the  RevA boards have prove problematic
+for development with non-Keil tools.
+
 # Prerequisites
 
 1. ARM Cross-compiler installed and added to system path
@@ -29,7 +32,8 @@ e.g. with `arm-none-eabi-gcc -v`.
 
 2. Set up build system. Depending on the OS and desired build system, you might have
    to specify the build system explicitely (e.g. with `-G "MinGW Makefiles"` or
-   `-G "Ninja"` on Windows) instead of using the defaults
+   `-G "Ninja"` on Windows) instead of using the defaults. There are also various build options
+   available. See the [cmake](#cmake) section for more information.
 
    ```sh
    cmake ..
@@ -94,3 +98,26 @@ to the repository root. Now open the folder in Eclipse as a project and make sur
 Another requirement is that you still need to set up the Eclipse build configuration at least once
 in the `build` folder like shown in the [build](#build) section. After that you should be able to
 build and debug with the hammer and debug button conveniently now.
+
+# <a id="cmake"></a> Additional CMake options
+
+You can configure the build process by passing these options with `-D<Option>=<Value>`
+to the `cmake` build generation call. This sections give an overview of the most
+important build options. All configuration options will be copied to the `VORConfig.h`
+file inside the build folder.
+
+## Boolean options
+
+Set value to `ON` or `OFF`:
+
+- `GCC_USE_NANO_LIB`: Can be used to use `newlib-nano` for reduced code size.
+- `GCC_NANOLIB_SCAN_FLOAT`: Only relevant when using `newlib-nano`. Allow scanning floats.
+- `GCC_NANOLIB_PRINT_FLOAT`: Only relevant when using `newlib-nano`. Allow printing floats
+- `VOR_ENABLE_RTT`: Enable logging via Segger-RTT
+
+## Integer options
+
+Set value to integer value
+
+- `VOR_XTAL`, `VOR_HBO` and `VOR_EXTCLK`: Set fixed clock values for software which can be modified
+  by hardware configuration
