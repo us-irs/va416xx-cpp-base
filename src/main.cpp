@@ -16,7 +16,6 @@ int main(void) {
     VOR_printf("HAL init failed with code %d", result);
   }
   for (;;) {
-    printf("Hallo Welt\n");
     GPIO_TOG(VOR_PORTG, 5);
     for (size_t idx = 0; idx < 10000000; idx++) {
     }
