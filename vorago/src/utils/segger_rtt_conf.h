@@ -73,8 +73,8 @@ Revision: $Rev: 21386 $
 // Take in and set to correct values for Cortex-A systems with CPU cache
 //
 //#define SEGGER_RTT_CPU_CACHE_LINE_SIZE            (32)          // Largest cache line size (in
-//bytes) in the current system #define SEGGER_RTT_UNCACHED_OFF                   (0xFB000000)  //
-//Address alias where RTT CB and buffers can be accessed uncached
+// bytes) in the current system #define SEGGER_RTT_UNCACHED_OFF                   (0xFB000000)  //
+// Address alias where RTT CB and buffers can be accessed uncached
 //
 // Most common case:
 // Up-channel 0: RTT

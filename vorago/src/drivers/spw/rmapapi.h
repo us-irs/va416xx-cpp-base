@@ -10,30 +10,27 @@
 /*   See the file COPYING for the full details of the license. */
 /*****************************************************************************/
 
-enum rmap_type {writecmd, readcmd, rmwcmd, writerep, readrep, rmwrep};
-enum sel_type {no = 0, yes = 1};
+enum rmap_type { writecmd, readcmd, rmwcmd, writerep, readrep, rmwrep };
+enum sel_type { no = 0, yes = 1 };
 
-struct rmap_pkt 
-{
-   enum rmap_type type;
-   enum sel_type verify;
-   enum sel_type ack;
-   enum sel_type incr;
-   int destaddr;
-   int destkey;
-   int srcaddr;
-   int tid;
-   int addr;
-   int len;
-   int status;
-   int dstspalen;
-   char *dstspa;
-   int srcspalen;
-   char *srcspa;
+struct rmap_pkt {
+  enum rmap_type type;
+  enum sel_type verify;
+  enum sel_type ack;
+  enum sel_type incr;
+  int destaddr;
+  int destkey;
+  int srcaddr;
+  int tid;
+  int addr;
+  int len;
+  int status;
+  int dstspalen;
+  char *dstspa;
+  int srcspalen;
+  char *srcspa;
 };
 
 int build_rmap_hdr(struct rmap_pkt *pkt, char *hdr, int *size);
 
 int parse_rmap_pkt(struct rmap_pkt *pkt, char *hdr, int *size);
-
-

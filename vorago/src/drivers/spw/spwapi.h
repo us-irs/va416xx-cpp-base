@@ -10,18 +10,16 @@
 /*   See the file COPYING for the full details of the license. */
 /*****************************************************************************/
 
-struct dmachanregs 
-{
-   volatile int ctrl;
-   volatile int rxmaxlen;
-   volatile int txdesc;
-   volatile int rxdesc;
-   volatile int addr;
-   volatile int unused[3];
+struct dmachanregs {
+  volatile int ctrl;
+  volatile int rxmaxlen;
+  volatile int txdesc;
+  volatile int rxdesc;
+  volatile int addr;
+  volatile int unused[3];
 };
 
-struct intdistregs
-{
+struct intdistregs {
   volatile int ctrl;
   volatile int intrx;
   volatile int ackrx;
@@ -36,8 +34,7 @@ struct intdistregs
   volatile int unused;
 };
 
-struct pnpregs
-{
+struct pnpregs {
   volatile int vendid;
   volatile int linkinfo;
   volatile int oa1;
@@ -48,85 +45,79 @@ struct pnpregs
   volatile int usn;
 };
 
-struct spwregs 
-{
-   volatile int ctrl;
-   volatile int status;
-   volatile int nodeaddr;
-   volatile int clkdiv;
-   volatile int destkey;
-   volatile int timereg;
-   volatile int timer;
-   volatile int unused;
-   struct dmachanregs dma[4];
-   struct intdistregs intdist;
-   volatile int unused2;
-   struct pnpregs pnp;
+struct spwregs {
+  volatile int ctrl;
+  volatile int status;
+  volatile int nodeaddr;
+  volatile int clkdiv;
+  volatile int destkey;
+  volatile int timereg;
+  volatile int timer;
+  volatile int unused;
+  struct dmachanregs dma[4];
+  struct intdistregs intdist;
+  volatile int unused2;
+  struct pnpregs pnp;
 };
 
-struct txdescriptor 
-{
-   volatile int ctrl;
-   volatile int haddr;
-   volatile int dlen;
-   volatile int daddr;
+struct txdescriptor {
+  volatile int ctrl;
+  volatile int haddr;
+  volatile int dlen;
+  volatile int daddr;
 };
 
-struct rxstatus 
-{
-   int truncated;
-   int dcrcerr;
-   int hcrcerr;
-   int eep;
+struct rxstatus {
+  int truncated;
+  int dcrcerr;
+  int hcrcerr;
+  int eep;
 };
 
-struct rxdescriptor 
-{
-   volatile int ctrl;
-   volatile int daddr;
+struct rxdescriptor {
+  volatile int ctrl;
+  volatile int daddr;
 };
 
-struct dmachanvar
-{
-  int    nospill;
-  int    rxmaxlen;
-  int    rxpnt;
-  int    rxchkpnt;
-  int    txpnt;
-  int    txchkpnt;
-  int    addr;
-  int    mask;
+struct dmachanvar {
+  int nospill;
+  int rxmaxlen;
+  int rxpnt;
+  int rxchkpnt;
+  int txpnt;
+  int txchkpnt;
+  int addr;
+  int mask;
   struct txdescriptor *txd;
-  struct rxdescriptor *rxd;  
+  struct rxdescriptor *rxd;
 };
 
-struct spwvars
-{
-   struct spwregs *regs;
-   int    rmap;
-   int    rxunaligned;
-   int    rmapcrc;
-   int    timetxen;
-   int    timerxen;
-   int    ver;
-   int    khz;
-   int    dmachan;
-   int    clkdiv;
-   int    clkdivs;
-   int    timer;
-   int    dc;
-   int    nodeaddr;
-   int    mask;
-   int    destkey;
-   int    port;
-   struct dmachanvar dma[4];
-   int    intdist;
-   int    pnp;
-   int    ntxdesc;
-   int    nrxdesc;
-   int    inttxen;
-   int    intrxen;
-   int    pnpen;
+struct spwvars {
+  struct spwregs *regs;
+  int rmap;
+  int rxunaligned;
+  int rmapcrc;
+  int timetxen;
+  int timerxen;
+  int ver;
+  int khz;
+  int dmachan;
+  int clkdiv;
+  int clkdivs;
+  int timer;
+  int dc;
+  int nodeaddr;
+  int mask;
+  int destkey;
+  int port;
+  struct dmachanvar dma[4];
+  int intdist;
+  int pnp;
+  int ntxdesc;
+  int nrxdesc;
+  int inttxen;
+  int intrxen;
+  int pnpen;
 };
 
 int spw_init(struct spwvars *spw);
@@ -134,11 +125,11 @@ int spw_init(struct spwvars *spw);
 int wait_running(struct spwvars *spw);
 
 /*sets node specific parameters in the spwvars structure */
-int spw_setparam(int nodeaddr, int clkdiv, int destkey,
-                 int timetxen, int timerxen, int spwadr, 
+int spw_setparam(int nodeaddr, int clkdiv, int destkey, int timetxen, int timerxen, int spwadr,
                  int khz, struct spwvars *spw, int port, int clkdivs);
 
-int spw_setparam_dma(int dmachan, int addr, int mask, int nospill, int rxmaxlen, struct spwvars *spw);
+int spw_setparam_dma(int dmachan, int addr, int mask, int nospill, int rxmaxlen,
+                     struct spwvars *spw);
 
 /*set new transmit descriptor pointer*/
 int set_txdesc(int dmachan, int pnt, struct spwvars *spw);
@@ -168,22 +159,22 @@ int spw_set_nodeadr(struct spwvars *spw);
 
 int spw_set_chanadr(int dmachan, struct spwvars *spw);
 
-
 /*set maximum receive packet length, returns 1 if the nodeaddr parameter is illegal,
 0 when operation completes successfully*/
 int spw_set_rxmaxlength(int dmachan, struct spwvars *spw);
 
-/*Transmits hsize bytes from hbuf and dsize bytes from dbuf.returns 0 on success. 
+/*Transmits hsize bytes from hbuf and dsize bytes from dbuf.returns 0 on success.
 /*1 if there are no free buffers. 2 if there was an illegal parameter value.*/
-int spw_tx(int dmachan, int hcrc, int dcrc, int skipcrcsize, int hsize, char *hbuf, int dsize, char *dbuf, struct spwvars *spw);
+int spw_tx(int dmachan, int hcrc, int dcrc, int skipcrcsize, int hsize, char *hbuf, int dsize,
+           char *dbuf, struct spwvars *spw);
 
 /*Receives one packet to buf. This function only initializes a descriptor, spw_checkrx should
 be used to poll when a packet has arrived*/
 int spw_rx(int dmachan, char *buf, struct spwvars *spw);
 
 /*Polls receiver descriptor. Returns 0 if no packet has been received,
-1 if packet has been received. Then size contains the number of 
-bytes received. rxs contains som status bits such as crc errors, 
+1 if packet has been received. Then size contains the number of
+bytes received. rxs contains som status bits such as crc errors,
 eep termination etc*/
 int spw_checkrx(int dmachan, int *size, struct rxstatus *rxs, struct spwvars *spw);
 
@@ -227,19 +218,3 @@ void spw_disablerx(int dmachan, struct spwvars *spw);
 void spw_disable_promiscuous(struct spwvars *spw);
 
 void spw_enable_promiscuous(struct spwvars *spw);
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-

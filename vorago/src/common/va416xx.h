@@ -1,32 +1,32 @@
 /****************************************************************************************************/
 /**
-* @file     va416xx.h
-*
-* @brief    CMSIS Cortex-M4 Peripheral Access Layer Header File for
-*           va416xx from VORAGO TECHNOLOGIES.
-*
-* @version  V1.3
-* @date     6. April 2020
-*
-* @note     Generated with SVDConv V2.87e
-*           from CMSIS SVD File 'va416xx.svd' Version 1.3,
-*
-* @par      VORAGO Technologies
-*
-*           ----------------------------------------------------------------------------
-*           Copyright (c) 2013-2020 VORAGO Technologies
-*
-*           BY DOWNLOADING, INSTALLING OR USING THIS SOFTWARE, YOU AGREE TO BE BOUND BY ALL THE TERMS
-*           AND CONDITIONS OF THE VORAGO TECHNOLOGIES END USER LICENSE AGREEMENT.
-*
-*           THIS SOFTWARE IS PROVIDED "AS IS". NO WARRANTIES, WHETHER EXPRESS, IMPLIED
-*           OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
-*           MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
-*           VORAGO TECHNOLOGIES SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE
-*           FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
-*
-*
-*******************************************************************************************************/
+ * @file     va416xx.h
+ *
+ * @brief    CMSIS Cortex-M4 Peripheral Access Layer Header File for
+ *           va416xx from VORAGO TECHNOLOGIES.
+ *
+ * @version  V1.3
+ * @date     6. April 2020
+ *
+ * @note     Generated with SVDConv V2.87e
+ *           from CMSIS SVD File 'va416xx.svd' Version 1.3,
+ *
+ * @par      VORAGO Technologies
+ *
+ *           ----------------------------------------------------------------------------
+ *           Copyright (c) 2013-2020 VORAGO Technologies
+ *
+ *           BY DOWNLOADING, INSTALLING OR USING THIS SOFTWARE, YOU AGREE TO BE BOUND BY ALL THE
+ *TERMS AND CONDITIONS OF THE VORAGO TECHNOLOGIES END USER LICENSE AGREEMENT.
+ *
+ *           THIS SOFTWARE IS PROVIDED "AS IS". NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ *           OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ *           MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ *           VORAGO TECHNOLOGIES SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE
+ *           FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+ *
+ *******************************************************************************************************/
 
 /** @addtogroup VORAGO TECHNOLOGIES
  * @{
@@ -565,13 +565,13 @@ typedef struct { /*!< GPIO Structure                                            
     __IO uint32_t DELAY2;       /*!< Delay2 Register       */
     __IO uint8_t DELAY2BYTE[4]; /*!< Delay2 Register by Byte */
   };
-  __IO uint32_t IRQ_SEN;     /*!< Interrupt Sense Register (1:Level Sensitive, 0:Edge Sensitive)     */
-  __IO uint32_t IRQ_EDGE;    /*!< Interrupt Both Edge Register (1:Both Edges, 0:Single Edge)    */
-  __IO uint32_t IRQ_EVT;     /*!< Interrupt Event Register (1:HighLevel/L->H Edge, 0:LowLevel/H->L
-                                  Edge)     */
-  __IO uint32_t IRQ_ENB;     /*!< Interrupt Enable Register     */
-  __I uint32_t IRQ_RAW;      /*!< Raw Interrupt Status      */
-  __I uint32_t IRQ_END;      /*!< Masked Interrupt Status      */
+  __IO uint32_t IRQ_SEN;  /*!< Interrupt Sense Register (1:Level Sensitive, 0:Edge Sensitive)     */
+  __IO uint32_t IRQ_EDGE; /*!< Interrupt Both Edge Register (1:Both Edges, 0:Single Edge)    */
+  __IO uint32_t IRQ_EVT;  /*!< Interrupt Event Register (1:HighLevel/L->H Edge, 0:LowLevel/H->L
+                               Edge)     */
+  __IO uint32_t IRQ_ENB;  /*!< Interrupt Enable Register     */
+  __I uint32_t IRQ_RAW;   /*!< Raw Interrupt Status      */
+  __I uint32_t IRQ_END;   /*!< Masked Interrupt Status      */
   __IO uint32_t EDGE_STATUS; /*!< Edge Status Register */
   __I uint32_t RESERVED[235];
   __I uint32_t PERID; /*!< Peripheral ID Register                                                */
@@ -589,12 +589,12 @@ typedef struct {      /*!< TIM Structure                                        
   __IO uint32_t CTRL; /*!< Control Register                                                      */
   __IO uint32_t RST_VALUE; /*!< The value that counter start from after reaching 0. */
   __IO uint32_t CNT_VALUE; /*!< The current value of the counter */
-  __IO uint32_t ENABLE;    /*!< Alternate access to the Counter ENABLE bit in the CTRL Register    */
-  __IO uint32_t CSD_CTRL;  /*!< The Cascade Control Register. Controls the counter external
-                                enable signals  */
-  __IO uint32_t CASCADE0;  /*!< Cascade Enable Selection  */
-  __IO uint32_t CASCADE1;  /*!< Cascade Enable Selection  */
-  __IO uint32_t CASCADE2;  /*!< Cascade Enable Selection  */
+  __IO uint32_t ENABLE;   /*!< Alternate access to the Counter ENABLE bit in the CTRL Register    */
+  __IO uint32_t CSD_CTRL; /*!< The Cascade Control Register. Controls the counter external
+                               enable signals  */
+  __IO uint32_t CASCADE0; /*!< Cascade Enable Selection  */
+  __IO uint32_t CASCADE1; /*!< Cascade Enable Selection  */
+  __IO uint32_t CASCADE2; /*!< Cascade Enable Selection  */
 
   union {
     __IO uint32_t PWMA_VALUE; /*!< The Pulse Width Modulation ValueA */
@@ -1068,27 +1068,25 @@ typedef struct { /*!< ETH Structure                                             
   __I uint32_t TXBCASTFRAMES_G;   /*!< MMC Good Broadcast Frames Register   */
   __I uint32_t TXMCASTFRAMES_G;   /*!< MMC Good Multicast Frames Register   */
   __I uint32_t TX64OCT_GB;        /*!< MMC Good and bad Frames transmitted with length 64        */
-  __I uint32_t TX65TO127OCT_GB;   /*!< MMC Good and bad Frames transmitted with length 65 to 127   */
+  __I uint32_t TX65TO127OCT_GB;  /*!< MMC Good and bad Frames transmitted with length 65 to 127   */
+  __I uint32_t TX128TO255OCT_GB; /*!< MMC Good and bad Frames transmitted with length 128 to 255 */
+  __I uint32_t TX256TO511OCT_GB; /*!< MMC Good and bad Frames transmitted with length 256 to 511 */
   __I uint32_t
-      TX128TO255OCT_GB; /*!< MMC Good and bad Frames transmitted with length 128 to 255 */
-  __I uint32_t
-      TX256TO511OCT_GB; /*!< MMC Good and bad Frames transmitted with length 256 to 511 */
-  __I uint32_t
-      TX512TO1023OCT_GB;        /*!< MMC Good and bad Frames transmitted with length 512 to 1023        */
+      TX512TO1023OCT_GB; /*!< MMC Good and bad Frames transmitted with length 512 to 1023        */
   __I uint32_t TX1024MAXOCT_GB; /*!< MMC Good and bad Frames transmitted with length 1024 to max
                                      bytes */
   __I uint32_t TXUCASTFRAME_GB; /*!< MMC number of good and bad unicast frames transmitted */
   __I uint32_t TXMCASTFRAME_GB; /*!< MMC number of good and bad MULTIcast frames transmitted */
   __I uint32_t TXBCASTFRAME_GB; /*!< MMC number of good and bad broadcast frames transmitted */
-  __I uint32_t TXUNDERERR;    /*!< MMC number of frames aborted because of frame underflow error    */
+  __I uint32_t TXUNDERERR; /*!< MMC number of frames aborted because of frame underflow error    */
   __I uint32_t TXSINGLECOL_G; /*!< MMC Number of successfully transmitted frames after a single
                                    collision */
   __I uint32_t TXMULTICOL_G;  /*!< MMC Number of successfully transmitted frames after multiple
                                    collisions  */
-  __I uint32_t TXDEFERRED;    /*!< MMC Number of successfully transmitted frames after a deferral    */
-  __I uint32_t TXLATECOL;     /*!< MMC Number of aborted frames because of late collision error     */
-  __I uint32_t TXEXESSCOL;    /*!< MMC Number of aborted frames because of excessive collision
-                                   errors    */
+  __I uint32_t TXDEFERRED; /*!< MMC Number of successfully transmitted frames after a deferral    */
+  __I uint32_t TXLATECOL;  /*!< MMC Number of aborted frames because of late collision error     */
+  __I uint32_t TXEXESSCOL; /*!< MMC Number of aborted frames because of excessive collision
+                                errors    */
   __I uint32_t TXCARRIERERROR; /*!< MMC Number of aborted frames because of carrier sense error */
   __I uint32_t TXOCTETCOUNT_G; /*!< MMC Number of bytes transmitted frames only in good frames */
   __I uint32_t TXFRAMECOUNT_G; /*!< MMC Number of good frames transmitted */
@@ -1108,9 +1106,9 @@ typedef struct { /*!< ETH Structure                                             
   __I uint32_t RXRUNTERROR;     /*!< MMC Number of frames received with runt error     */
   __I uint32_t RXJABBERERROR;   /*!< MMC Number of giant frames received with length greater than
                                      1518 bytes and with CRC error   */
-  __I uint32_t RXUNDERSIZE_G;   /*!< MMC Number of frames received with length less than 64 bytes   */
-  __I uint32_t RXOVERSIZE_G; /*!< MMC Number of frames received without errors with length greater
-                                  than the max size */
+  __I uint32_t RXUNDERSIZE_G; /*!< MMC Number of frames received with length less than 64 bytes   */
+  __I uint32_t RXOVERSIZE_G;  /*!< MMC Number of frames received without errors with length greater
+                                   than the max size */
   __I uint32_t
       RX64OCTETS_GB; /*!< MMC Number of good and bad frames received with length 64 bytes       */
   __I uint32_t RX65TO127OCT_GB;  /*!< MMC Number of good and bad frames received with length between
@@ -1147,7 +1145,7 @@ typedef struct { /*!< ETH Structure                                             
       SUBSEC_INC; /*!< Holds the 8-bit value by which the Sub-Second register is incremented */
   __I uint32_t
       SYSTIME_SECONDS; /*!< Holds the lower 32 bits of the second field of the system time        */
-  __I uint32_t SYSTIME_NANOSEC;    /*!< Holds 32 bits of the nano-second field of the system time    */
+  __I uint32_t SYSTIME_NANOSEC; /*!< Holds 32 bits of the nano-second field of the system time    */
   __IO uint32_t SYSTIME_SECSUPDAT; /*!< Holds the lower 32 bits of the second field to be written
                                       to, added to, or subtracted from the system time value */
   __IO uint32_t SYSTIME_NSECUP;  /*!< Holds 32 bits of the nano-second field to be written to, added
@@ -6939,10 +6937,8 @@ typedef struct { /*!< ETH Structure                                             
   (0x2UL) /*!< SPI FIFO_CLR: TXFIFO (Bitfield-Mask: 0x01)                  */
 
 /* ----------------------------------  SPI_DATA  ---------------------------------- */
-#define SPI_DATA_VALUE_Pos \
-  (0UL) /*!< SPI DATA: VALUE (Bit 0) */
-#define SPI_DATA_VALUE_Msk \
-  (0xffffUL) /*!< SPI DATA: VALUE (Bitfield-Mask: 0xffff) */
+#define SPI_DATA_VALUE_Pos (0UL)      /*!< SPI DATA: VALUE (Bit 0) */
+#define SPI_DATA_VALUE_Msk (0xffffUL) /*!< SPI DATA: VALUE (Bitfield-Mask: 0xffff) */
 #define SPI_DATA_BMSKIPDATA_Pos \
   (30UL) /*!< SPI DATA: BMSKIPDATA (Bit 30) 					             */
 #define SPI_DATA_BMSKIPDATA_Msk \
@@ -7127,8 +7123,7 @@ typedef struct { /*!< ETH Structure                                             
   (0x2UL) /*!< SPI0 FIFO_CLR: TXFIFO (Bitfield-Mask: 0x01)                 */
 
 /* ----------------------------------  SPI0_DATA  --------------------------------- */
-#define SPI0_DATA_VALUE_Pos \
-  (0UL) /*!< SPI0 DATA: VALUE (Bit 0) */
+#define SPI0_DATA_VALUE_Pos (0UL) /*!< SPI0 DATA: VALUE (Bit 0) */
 #define SPI0_DATA_VALUE_Msk \
   (0xffffUL) /*!< SPI0 DATA: VALUE (Bitfield-Mask: 0xffff)                    */
 #define SPI0_DATA_BMSKIPDATA_Pos \
@@ -7315,8 +7310,7 @@ typedef struct { /*!< ETH Structure                                             
   (0x2UL) /*!< SPI1 FIFO_CLR: TXFIFO (Bitfield-Mask: 0x01)                 */
 
 /* ----------------------------------  SPI1_DATA  --------------------------------- */
-#define SPI1_DATA_VALUE_Pos \
-  (0UL) /*!< SPI1 DATA: VALUE (Bit 0) */
+#define SPI1_DATA_VALUE_Pos (0UL) /*!< SPI1 DATA: VALUE (Bit 0) */
 #define SPI1_DATA_VALUE_Msk \
   (0xffffUL) /*!< SPI1 DATA: VALUE (Bitfield-Mask: 0xffff)                    */
 #define SPI1_DATA_BMSKIPDATA_Pos \
@@ -7503,8 +7497,7 @@ typedef struct { /*!< ETH Structure                                             
   (0x2UL) /*!< SPI2 FIFO_CLR: TXFIFO (Bitfield-Mask: 0x01)                 */
 
 /* ----------------------------------  SPI2_DATA  --------------------------------- */
-#define SPI2_DATA_VALUE_Pos \
-  (0UL) /*!< SPI2 DATA: VALUE (Bit 0) */
+#define SPI2_DATA_VALUE_Pos (0UL) /*!< SPI2 DATA: VALUE (Bit 0) */
 #define SPI2_DATA_VALUE_Msk \
   (0xffffUL) /*!< SPI2 DATA: VALUE (Bitfield-Mask: 0xffff)                    */
 #define SPI2_DATA_BMSKIPDATA_Pos \
@@ -7691,8 +7684,7 @@ typedef struct { /*!< ETH Structure                                             
   (0x2UL) /*!< SPI3 FIFO_CLR: TXFIFO (Bitfield-Mask: 0x01)                 */
 
 /* ----------------------------------  SPI3_DATA  --------------------------------- */
-#define SPI3_DATA_VALUE_Pos \
-  (0UL) /*!< SPI3 DATA: VALUE (Bit 0) */
+#define SPI3_DATA_VALUE_Pos (0UL) /*!< SPI3 DATA: VALUE (Bit 0) */
 #define SPI3_DATA_VALUE_Msk \
   (0xffffUL) /*!< SPI3 DATA: VALUE (Bitfield-Mask: 0xffff)                    */
 #define SPI3_DATA_BMSKIPDATA_Pos \
