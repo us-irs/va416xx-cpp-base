@@ -705,6 +705,7 @@ hal_status_t HAL_Uart_SetRXIntCallback(VOR_UART_Type* const uart, eventHandlerId
 }
 
 // UART0-2 ISR(s)
+void UART0_TX_IRQHandler(void) __attribute__((weak));
 void UART0_TX_IRQHandler(void) {
   // callback to user function (if set)
   if ((aTxCallbackIdx[UART0_BANK] != eventHandlerIdx_null) &&
@@ -713,6 +714,7 @@ void UART0_TX_IRQHandler(void) {
   }
 }
 
+void UART0_RX_IRQHandler(void) __attribute__((weak));
 void UART0_RX_IRQHandler(void) {
   uint32_t loopTerm = UART_FIFO_SZ;
   if (VOR_UART0->IRQ_END & UART_IRQ_END_IRQ_RX_Msk) {
@@ -737,6 +739,7 @@ void UART0_RX_IRQHandler(void) {
   }
 }
 
+void UART1_TX_IRQHandler(void) __attribute__((weak));
 void UART1_TX_IRQHandler(void) {
   // callback to user function (if set)
   if ((aTxCallbackIdx[UART1_BANK] != eventHandlerIdx_null) &&
@@ -745,6 +748,7 @@ void UART1_TX_IRQHandler(void) {
   }
 }
 
+void UART1_RX_IRQHandler(void) __attribute__((weak));
 void UART1_RX_IRQHandler(void) {
   uint32_t loopTerm = UART_FIFO_SZ;
   if (VOR_UART1->IRQ_END & UART_IRQ_END_IRQ_RX_Msk) {
@@ -769,6 +773,7 @@ void UART1_RX_IRQHandler(void) {
   }
 }
 
+void UART2_TX_IRQHandler(void) __attribute__((weak));
 void UART2_TX_IRQHandler(void) {
   // callback to user function (if set)
   if ((aTxCallbackIdx[UART2_BANK] != eventHandlerIdx_null) &&
@@ -777,6 +782,7 @@ void UART2_TX_IRQHandler(void) {
   }
 }
 
+void UART2_RX_IRQHandler(void) __attribute__((weak));
 void UART2_RX_IRQHandler(void) {
   uint32_t loopTerm = UART_FIFO_SZ;
   if (VOR_UART2->IRQ_END & UART_IRQ_END_IRQ_RX_Msk) {

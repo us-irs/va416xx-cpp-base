@@ -1008,7 +1008,10 @@ void I2C0_MS_IRQHandler(void) {
     }
   }
 }
+
+void I2C0_MS_RX_IRQHandler(void) __attribute__((weak));
 void I2C0_MS_RX_IRQHandler(void) { I2C0_MS_IRQHandler(); }
+void I2C0_MS_TX_IRQHandler(void) __attribute__((weak));
 void I2C0_MS_TX_IRQHandler(void) { I2C0_MS_IRQHandler(); }
 
 /*******************************************************************************
@@ -1084,6 +1087,7 @@ void I2C1_MS_TX_IRQHandler(void) { I2C1_MS_IRQHandler(); }
  ** @brief  I2C2 master mode IRQ handler
  **
  ******************************************************************************/
+void I2C2_MS_IRQHandler(void) __attribute__((weak));
 void I2C2_MS_IRQHandler(void) {
   if (VOR_I2C2->IRQ_END & I2C_IRQ_END_IDLE_Msk) {
     // handle IDLE - transfer done
@@ -1143,7 +1147,9 @@ void I2C2_MS_IRQHandler(void) {
     }
   }
 }
+void I2C2_MS_RX_IRQHandler(void) __attribute__((weak));
 void I2C2_MS_RX_IRQHandler(void) { I2C2_MS_IRQHandler(); }
+void I2C2_MS_TX_IRQHandler(void) __attribute__((weak));
 void I2C2_MS_TX_IRQHandler(void) { I2C2_MS_IRQHandler(); }
 
 /*******************************************************************************

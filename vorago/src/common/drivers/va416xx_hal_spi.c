@@ -892,6 +892,7 @@ __STATIC_INLINE void SPI_StateMachine(uint32_t bank) {
         apEventHList[currentXfer[bank].callbackIdx]();
       }
       // fall through to the next case (run FINISHED)
+      // no break
     case en_spi_state_finished:
       // look for an xfer on the queue, pull it off of the queue, fill the txfifo
       if (VOR_CircularBuffer_IsEmpty(&vcbSpiTxns[bank])) {
