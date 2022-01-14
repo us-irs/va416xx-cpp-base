@@ -19,44 +19,46 @@
  * DAMAGES, FOR ANY REASON WHATSOEVER.
  *
  ****************************************************************************************/
- 
-/*****************************************************************************/ 
-/* Include files                                                             */ 
+
+/*****************************************************************************/
+/* Include files                                                             */
 /*****************************************************************************/
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include "va416xx.h"
 #include "va416xx_debug.h"
+
+#include <stdarg.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+
+#include "va416xx.h"
 
 #ifndef DEBUG_NO_HAL
 #include "va416xx_hal_uart.h"
 #endif
 
-/*****************************************************************************/ 
-/* Local pre-processor symbols/macros ('#define')                            */ 
+/*****************************************************************************/
+/* Local pre-processor symbols/macros ('#define')                            */
 /*****************************************************************************/
 
 //#define DEBUG_BUFFER_LEN (128)
 
-/*****************************************************************************/ 
-/* Global variable definitions (declared in header file with 'extern')       */ 
+/*****************************************************************************/
+/* Global variable definitions (declared in header file with 'extern')       */
 /*****************************************************************************/
 
-/*****************************************************************************/ 
-/* Local type definitions ('typedef')                                        */ 
+/*****************************************************************************/
+/* Local type definitions ('typedef')                                        */
 /*****************************************************************************/
 
-/*****************************************************************************/ 
-/* Local variable definitions ('static')                                     */ 
+/*****************************************************************************/
+/* Local variable definitions ('static')                                     */
 /*****************************************************************************/
 
-//static char debugBuf[DEBUG_BUFFER_LEN];
+// static char debugBuf[DEBUG_BUFFER_LEN];
 
-/*****************************************************************************/ 
-/* Local function prototypes ('static')                                      */ 
+/*****************************************************************************/
+/* Local function prototypes ('static')                                      */
 /*****************************************************************************/
 
 static en_stdio_t ioOut = en_stdio_none;
@@ -64,16 +66,15 @@ static en_stdio_t ioOut = en_stdio_none;
 static uint8_t log_buff[100];
 #endif
 
-/*****************************************************************************/ 
-/* Function implementation - global ('extern') and local ('static')          */ 
+/*****************************************************************************/
+/* Function implementation - global ('extern') and local ('static')          */
 /*****************************************************************************/
 
-void VOR_printf(const char *fmt, ...)
-{
+void VOR_printf(const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  
-  if(ioOut == en_stdio_rtt){
+
+  if (ioOut == en_stdio_rtt) {
 #ifdef ENABLE_RTT
     vsnprintf((char *)(log_buff), 100, fmt, args);
     SEGGER_RTT_WriteString(0, (const char *)log_buff);
@@ -82,16 +83,15 @@ void VOR_printf(const char *fmt, ...)
     vfprintf(stdout, fmt, args);
     fflush(stdout);
   }
-  
+
   va_end(args);
 }
 
-void DBG_printf(const char *fmt, ...)
-{
+void DBG_printf(const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  
-  if(ioOut == en_stdio_rtt){
+
+  if (ioOut == en_stdio_rtt) {
 #ifdef ENABLE_RTT
     vsnprintf((char *)(log_buff), 100, fmt, args);
     SEGGER_RTT_WriteString(0, "DEBUG: ");
@@ -102,16 +102,15 @@ void DBG_printf(const char *fmt, ...)
     vfprintf(stderr, fmt, args);
     fflush(stderr);
   }
-  
+
   va_end(args);
 }
 
-void DBG_println(const char *fmt, ...)
-{
+void DBG_println(const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  
-  if(ioOut == en_stdio_rtt){
+
+  if (ioOut == en_stdio_rtt) {
 #ifdef ENABLE_RTT
     vsnprintf((char *)(log_buff), 100, fmt, args);
     SEGGER_RTT_WriteString(0, "DEBUG: ");
@@ -124,16 +123,14 @@ void DBG_println(const char *fmt, ...)
     fprintf(stderr, "\r\n");
     fflush(stderr);
   }
-  
+
   va_end(args);
 }
 
-void DBG_SetStdioOutput(en_stdio_t io)
-{
+void DBG_SetStdioOutput(en_stdio_t io) {
   ioOut = io;
-  
-  switch(io)
-  {
+
+  switch (io) {
     case en_stdio_porta:
       // Configure BANK0 as outputs
       VOR_GPIO->BANK[0].DIR |= 0x000000FFU;
@@ -161,7 +158,7 @@ void DBG_SetStdioOutput(en_stdio_t io)
     case en_stdio_rtt:
 #ifdef ENABLE_RTT
       SEGGER_RTT_Init();
-	    SEGGER_RTT_ConfigUpBuffer(0, NULL, NULL, 0, SEGGER_RTT_MODE_NO_BLOCK_SKIP);
+      SEGGER_RTT_ConfigUpBuffer(0, NULL, NULL, 0, SEGGER_RTT_MODE_NO_BLOCK_SKIP);
 #endif
       break;
     default:
@@ -169,12 +166,10 @@ void DBG_SetStdioOutput(en_stdio_t io)
   }
 }
 
-int fputc(int c, FILE *fPointer)
-{
+int fputc(int c, FILE *fPointer) {
   uint32_t dm;
-  
-  switch(ioOut)
-  {
+
+  switch (ioOut) {
     case en_stdio_none:
       break;
     case en_stdio_uart0:
@@ -194,26 +189,26 @@ int fputc(int c, FILE *fPointer)
       break;
     case en_stdio_porta:
       dm = VOR_GPIO->BANK[0].DATAMASK;
-      VOR_GPIO->BANK[0].DATAMASK  = 0xff;       // Write DataMask
-      VOR_GPIO->BANK[0].DATAOUT   = 0x80 | c;  // Pulse bit 7
+      VOR_GPIO->BANK[0].DATAMASK = 0xff;     // Write DataMask
+      VOR_GPIO->BANK[0].DATAOUT = 0x80 | c;  // Pulse bit 7
       VOR_GPIO->BANK[0].DATAMASK = dm;
       break;
     case en_stdio_portb:
       dm = VOR_GPIO->BANK[1].DATAMASK;
-      VOR_GPIO->BANK[1].DATAMASK  = 0xff;       // Write DataMask
-      VOR_GPIO->BANK[1].DATAOUT   = 0x80 | c;  // Pulse bit 7
+      VOR_GPIO->BANK[1].DATAMASK = 0xff;     // Write DataMask
+      VOR_GPIO->BANK[1].DATAOUT = 0x80 | c;  // Pulse bit 7
       VOR_GPIO->BANK[1].DATAMASK = dm;
       break;
     case en_stdio_portc:
       dm = VOR_GPIO->BANK[2].DATAMASK;
-      VOR_GPIO->BANK[2].DATAMASK  = 0xff;       // Write DataMask
-      VOR_GPIO->BANK[2].DATAOUT   = 0x80 | c;  // Pulse bit 7
+      VOR_GPIO->BANK[2].DATAMASK = 0xff;     // Write DataMask
+      VOR_GPIO->BANK[2].DATAOUT = 0x80 | c;  // Pulse bit 7
       VOR_GPIO->BANK[2].DATAMASK = dm;
       break;
     case en_stdio_portd:
       dm = VOR_GPIO->BANK[3].DATAMASK;
-      VOR_GPIO->BANK[3].DATAMASK  = 0xff;       // Write DataMask
-      VOR_GPIO->BANK[3].DATAOUT   = 0x80 | c;  // Pulse bit 7
+      VOR_GPIO->BANK[3].DATAMASK = 0xff;     // Write DataMask
+      VOR_GPIO->BANK[3].DATAOUT = 0x80 | c;  // Pulse bit 7
       VOR_GPIO->BANK[3].DATAMASK = dm;
       break;
     case en_stdio_rtt:
@@ -225,11 +220,8 @@ int fputc(int c, FILE *fPointer)
   return c;
 }
 
-en_stdio_t DBG_GetStdioOutput(void)
-{
-  return ioOut;
-}
+en_stdio_t DBG_GetStdioOutput(void) { return ioOut; }
 
-/*****************************************************************************/ 
-/* End of file                                                               */ 
+/*****************************************************************************/
+/* End of file                                                               */
 /*****************************************************************************/

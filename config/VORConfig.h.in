@@ -2,7 +2,11 @@
 #define CONFIG_VORCONIG_H
 
 #cmakedefine VOR_VERBOSE_LEVEL @VOR_VERBOSE_LEVEL@
-#cmakedefine VOR_SYSTEM_CLOCK @VOR_SYSTEM_CLOCK@
+#cmakedefine VOR_ENABLE_RTT @VOR_ENABLE_RTT@
+
+#cmakedefine VOR_XTAL @VOR_XTAL@
+#cmakedefine VOR_HBO @VOR_HBO@
+#cmakedefine VOR_EXTCLK @VOR_EXTCLK@
 
 #cmakedefine01 VOR_RTT_LOG
 

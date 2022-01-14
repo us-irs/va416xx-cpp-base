@@ -19,41 +19,41 @@
  * DAMAGES, FOR ANY REASON WHATSOEVER.
  *
  ****************************************************************************************/
- 
+
 #ifndef __SPI_FRAM_H
 #define __SPI_FRAM_H
 
-/*****************************************************************************/ 
-/* Include files                                                             */ 
+/*****************************************************************************/
+/* Include files                                                             */
 /*****************************************************************************/
 
 #include "va416xx_hal.h"
 
-/*****************************************************************************/ 
-/* Global pre-processor symbols/macros ('#define')                           */ 
+/*****************************************************************************/
+/* Global pre-processor symbols/macros ('#define')                           */
 /*****************************************************************************/
 
 #define FRAM_LEN (0x40000)
 //#define USE_HAL_DRIVER
 
 /*****************************************************************************/
-/* Global type definitions ('typedef')                                       */ 
+/* Global type definitions ('typedef')                                       */
 /*****************************************************************************/
 
 /*****************************************************************************/
 /* Global variable declarations ('extern', definition in C source)           */
 /*****************************************************************************/
 
-/*****************************************************************************/ 
-/* Global function prototypes ('extern', definition in C source)             */ 
+/*****************************************************************************/
+/* Global function prototypes ('extern', definition in C source)             */
 /*****************************************************************************/
 
-extern hal_status_t FRAM_Init  (uint8_t spiBank, uint8_t csNum);
-extern hal_status_t FRAM_Write (uint8_t spiBank, uint32_t addr, uint8_t *buf, uint32_t len);
-extern hal_status_t FRAM_Read  (uint8_t spiBank, uint32_t addr, uint8_t *buf, uint32_t len);
+extern hal_status_t FRAM_Init(uint8_t spiBank, uint8_t csNum);
+extern hal_status_t FRAM_Write(uint8_t spiBank, uint32_t addr, uint8_t *buf, uint32_t len);
+extern hal_status_t FRAM_Read(uint8_t spiBank, uint32_t addr, uint8_t *buf, uint32_t len);
 extern hal_status_t FRAM_UnInit(uint8_t spiBank);
 
-/*****************************************************************************/ 
-/* End of file                                                               */ 
+/*****************************************************************************/
+/* End of file                                                               */
 /*****************************************************************************/
 #endif /* __SPI_FRAM_H */

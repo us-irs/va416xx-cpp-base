@@ -19,64 +19,63 @@
  * DAMAGES, FOR ANY REASON WHATSOEVER.
  *
  ****************************************************************************************/
- 
+
 #ifndef __HAL_IRQROUTER_H
 #define __HAL_IRQROUTER_H
 
-/*****************************************************************************/ 
-/* Include files                                                             */ 
+/*****************************************************************************/
+/* Include files                                                             */
 /*****************************************************************************/
 
 #include "va416xx_hal.h"
 
-/*****************************************************************************/ 
-/* Global pre-processor symbols/macros ('#define')                           */ 
+/*****************************************************************************/
+/* Global pre-processor symbols/macros ('#define')                           */
 /*****************************************************************************/
 
 /** Version */
-#define HAL_IRQROUTER_VERSION (0x00000200) // 0.2.0 (23 September 2019)
+#define HAL_IRQROUTER_VERSION (0x00000200)  // 0.2.0 (23 September 2019)
 
 // IRQ Router peripheral clock enable/disable macros
 #define IRQROUTER_ENABLE_CLOCK() VOR_SYSCONFIG->PERIPHERAL_CLK_ENABLE |= CLK_ENABLE_IRQ
 #define IRQROUTER_DISABLE_CLOCK() VOR_SYSCONFIG->PERIPHERAL_CLK_ENABLE &= ~CLK_ENABLE_IRQ
 
 /*****************************************************************************/
-/* Global type definitions ('typedef')                                       */ 
+/* Global type definitions ('typedef')                                       */
 /*****************************************************************************/
 
 /** DMASELx register DMA selection codes */
-typedef enum
-{
-  en_irqr_dmasel_none       = 14,
-  en_irqr_dmasel_spi0_tx    = 0,
-  en_irqr_dmasel_spi0_rx    = 1,
-  en_irqr_dmasel_spi1_tx    = 2,
-  en_irqr_dmasel_spi1_rx    = 3,
-  en_irqr_dmasel_spi2_tx    = 4,
-  en_irqr_dmasel_spi2_rx    = 5,
-  en_irqr_dmasel_spi3_tx    = 6,
-  en_irqr_dmasel_spi3_rx    = 7,
-  en_irqr_dmasel_uart0_tx   = 8,
-  en_irqr_dmasel_uart0_rx   = 9,
-  en_irqr_dmasel_uart1_tx   = 10,
-  en_irqr_dmasel_uart1_rx   = 11,
-  en_irqr_dmasel_uart2_tx   = 12,
-  en_irqr_dmasel_uart2_rx   = 13,
-  en_irqr_dmasel_spw        = 22,
-  en_irqr_dmasel_dac0       = 24,
-  en_irqr_dmasel_dac1       = 25,
-  en_irqr_dmasel_adc        = 28,
-  en_irqr_dmasel_wdog       = 31,
-  en_irqr_dmasel_tim0_done  = 32,
-  en_irqr_dmasel_tim1_done  = 33,
-  en_irqr_dmasel_tim2_done  = 34,
-  en_irqr_dmasel_tim3_done  = 35,
-  en_irqr_dmasel_tim4_done  = 36,
-  en_irqr_dmasel_tim5_done  = 37,
-  en_irqr_dmasel_tim6_done  = 38,
-  en_irqr_dmasel_tim7_done  = 39,
-  en_irqr_dmasel_tim8_done  = 40,
-  en_irqr_dmasel_tim9_done  = 41,
+typedef enum {
+  en_irqr_dmasel_none = 14,
+  en_irqr_dmasel_spi0_tx = 0,
+  en_irqr_dmasel_spi0_rx = 1,
+  en_irqr_dmasel_spi1_tx = 2,
+  en_irqr_dmasel_spi1_rx = 3,
+  en_irqr_dmasel_spi2_tx = 4,
+  en_irqr_dmasel_spi2_rx = 5,
+  en_irqr_dmasel_spi3_tx = 6,
+  en_irqr_dmasel_spi3_rx = 7,
+  en_irqr_dmasel_uart0_tx = 8,
+  en_irqr_dmasel_uart0_rx = 9,
+  en_irqr_dmasel_uart1_tx = 10,
+  en_irqr_dmasel_uart1_rx = 11,
+  en_irqr_dmasel_uart2_tx = 12,
+  en_irqr_dmasel_uart2_rx = 13,
+  en_irqr_dmasel_spw = 22,
+  en_irqr_dmasel_dac0 = 24,
+  en_irqr_dmasel_dac1 = 25,
+  en_irqr_dmasel_adc = 28,
+  en_irqr_dmasel_wdog = 31,
+  en_irqr_dmasel_tim0_done = 32,
+  en_irqr_dmasel_tim1_done = 33,
+  en_irqr_dmasel_tim2_done = 34,
+  en_irqr_dmasel_tim3_done = 35,
+  en_irqr_dmasel_tim4_done = 36,
+  en_irqr_dmasel_tim5_done = 37,
+  en_irqr_dmasel_tim6_done = 38,
+  en_irqr_dmasel_tim7_done = 39,
+  en_irqr_dmasel_tim8_done = 40,
+  en_irqr_dmasel_tim9_done = 41,
   en_irqr_dmasel_tim10_done = 42,
   en_irqr_dmasel_tim11_done = 43,
   en_irqr_dmasel_tim12_done = 44,
@@ -91,8 +90,8 @@ typedef enum
   en_irqr_dmasel_tim21_done = 53,
   en_irqr_dmasel_tim22_done = 54,
   en_irqr_dmasel_tim23_done = 55,
-  en_irqr_dmasel_can0       = 56,
-  en_irqr_dmasel_can1       = 58,
+  en_irqr_dmasel_can0 = 56,
+  en_irqr_dmasel_can1 = 58,
   en_irqr_dmasel_i2c0_ms_rx = 60,
   en_irqr_dmasel_i2c0_ms_tx = 61,
   en_irqr_dmasel_i2c0_sl_rx = 62,
@@ -107,14 +106,9 @@ typedef enum
   en_irqr_dmasel_i2c2_sl_tx = 71
 } en_irqr_dmasel_t;
 
-typedef enum
-{
-  en_irqr_dmattsel_dmareq = 0,
-  en_irqr_dmattsel_dmasreq = 1
-} en_irqr_dmattsel_t;
+typedef enum { en_irqr_dmattsel_dmareq = 0, en_irqr_dmattsel_dmasreq = 1 } en_irqr_dmattsel_t;
 
-typedef enum 
-{
+typedef enum {
   en_irqr_adcdacsel_tim0_stat = 0,
   en_irqr_adcdacsel_tim1_stat = 1,
   en_irqr_adcdacsel_tim2_stat = 2,
@@ -145,8 +139,8 @@ typedef enum
 /* Global variable declarations ('extern', definition in C source)           */
 /*****************************************************************************/
 
-/*****************************************************************************/ 
-/* Global function prototypes ('extern', definition in C source)             */ 
+/*****************************************************************************/
+/* Global function prototypes ('extern', definition in C source)             */
 /*****************************************************************************/
 
 extern hal_status_t HAL_Irqrouter_Init(void);
@@ -157,7 +151,7 @@ extern hal_status_t HAL_Irqrouter_SetDacSel(uint32_t channel, uint32_t timerNum)
 extern hal_status_t HAL_Irqrouter_Reset(void);
 extern hal_status_t HAL_Irqrouter_DeInit(void);
 
-/*****************************************************************************/ 
-/* End of file                                                               */ 
+/*****************************************************************************/
+/* End of file                                                               */
 /*****************************************************************************/
 #endif /* __HAL_IRQROUTER_H */

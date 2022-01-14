@@ -1,10 +1,14 @@
-/**************************************************************************//**
- * @file     system_ARMCM4.c
- * @brief    CMSIS Device System Source File for
- *           ARMCM4 Device Series
- * @version  V5.00
- * @date     10. January 2018
- ******************************************************************************/
+/**************************************************************************/ /**
+                                                                              * @file
+                                                                              *system_ARMCM4.c
+                                                                              * @brief    CMSIS
+                                                                              *Device System Source
+                                                                              *File for ARMCM4
+                                                                              *Device Series
+                                                                              * @version  V5.00
+                                                                              * @date     10.
+                                                                              *January 2018
+                                                                              ******************************************************************************/
 /*
  * Copyright (c) 2009-2018 Arm Limited. All rights reserved.
  *
@@ -22,51 +26,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
- /*
- From: C:\Keil\ARM\Device\ARM\ARMCM4\Source
- */
 
-#include "va416xx.h"
+/*
+From: C:\Keil\ARM\Device\ARM\ARMCM4\Source
+*/
+
 #include "VORConfig.h"
+#include "va416xx.h"
 
 /*----------------------------------------------------------------------------
   Define clocks (can override XTAL and EXTCLK in board.h)
  *----------------------------------------------------------------------------*/
 
 #ifndef VOR_XTAL
-#define  VOR_XTAL           (10000000UL)      /* Oscillator default frequency */
+#define VOR_XTAL (10000000UL) /* Oscillator default frequency */
 #endif
 
 #ifndef VOR_HBO
-#define  VOR_HBO            (20000000UL)      /* Internal HBO frequency */
+#define VOR_HBO (20000000UL) /* Internal HBO frequency */
 #endif
 
 #ifndef VOR_EXTCLK
-#define  VOR_EXTCLK         (10000000UL)      /* XTAL minus default frequency */
+#define VOR_EXTCLK (10000000UL) /* XTAL minus default frequency */
 #endif
 
 /*----------------------------------------------------------------------------
   Externals
  *----------------------------------------------------------------------------*/
-#if defined (__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
-  extern uint32_t __Vectors;
+#if defined(__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
+extern uint32_t __Vectors;
 #endif
 
 /*----------------------------------------------------------------------------
   System Core Clock Variable
  *----------------------------------------------------------------------------*/
-uint32_t SystemCoreClock = VOR_HBO; // default HBO CLK
-
+uint32_t SystemCoreClock = VOR_HBO;  // default HBO CLK
 
 /*----------------------------------------------------------------------------
   System Core Clock update function
  *----------------------------------------------------------------------------*/
-void SystemCoreClockUpdate (void)
-{
-  VOR_SYSCONFIG->PERIPHERAL_CLK_ENABLE |= CLK_ENABLE_CLKGEN; // ensure CLKGEN is enabled
-  switch((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_CLKSEL_SYS_Msk) >> CLKGEN_CTRL0_CLKSEL_SYS_Pos)
-  {
+void SystemCoreClockUpdate(void) {
+  VOR_SYSCONFIG->PERIPHERAL_CLK_ENABLE |= CLK_ENABLE_CLKGEN;  // ensure CLKGEN is enabled
+  switch ((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_CLKSEL_SYS_Msk) >> CLKGEN_CTRL0_CLKSEL_SYS_Pos) {
     case 0:
       // 00b - Internal HB Oscillator
       SystemCoreClock = VOR_HBO;
@@ -77,19 +78,19 @@ void SystemCoreClockUpdate (void)
       break;
     case 2:
       // 10b - PLL output
-      if((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_REF_CLK_SEL_Msk) == 0x1){
+      if ((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_REF_CLK_SEL_Msk) == 0x1) {
         SystemCoreClock = VOR_XTAL;
       }
-      if((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_REF_CLK_SEL_Msk) == 0x2){
+      if ((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_REF_CLK_SEL_Msk) == 0x2) {
         SystemCoreClock = VOR_EXTCLK;
       }
-      if((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_BYPASS_Msk) == 0){
-        SystemCoreClock /= (((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_CLKR_Msk) >> 
-                                                 CLKGEN_CTRL0_PLL_CLKR_Pos) + 1);
-        SystemCoreClock *= (((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_CLKF_Msk) >> 
-                                                 CLKGEN_CTRL0_PLL_CLKF_Pos) + 1);
-        SystemCoreClock /= (((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_CLKOD_Msk) >> 
-                                                 CLKGEN_CTRL0_PLL_CLKOD_Pos) + 1);
+      if ((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_BYPASS_Msk) == 0) {
+        SystemCoreClock /=
+            (((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_CLKR_Msk) >> CLKGEN_CTRL0_PLL_CLKR_Pos) + 1);
+        SystemCoreClock *=
+            (((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_CLKF_Msk) >> CLKGEN_CTRL0_PLL_CLKF_Pos) + 1);
+        SystemCoreClock /=
+            (((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_PLL_CLKOD_Msk) >> CLKGEN_CTRL0_PLL_CLKOD_Pos) + 1);
       }
       break;
     case 3:
@@ -97,10 +98,9 @@ void SystemCoreClockUpdate (void)
       SystemCoreClock = VOR_XTAL;
       break;
   }
-  
+
   // CLK_DIV_SEL
-  switch((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_CLK_DIV_SEL_Msk) >> CLKGEN_CTRL0_CLK_DIV_SEL_Pos)
-  {
+  switch ((VOR_CLKGEN->CTRL0 & CLKGEN_CTRL0_CLK_DIV_SEL_Msk) >> CLKGEN_CTRL0_CLK_DIV_SEL_Pos) {
     case 0:
       // divide by 1 (no divide)
       break;
@@ -122,21 +122,19 @@ void SystemCoreClockUpdate (void)
 /*----------------------------------------------------------------------------
   System initialization function
  *----------------------------------------------------------------------------*/
-void SystemInit (void)
-{
-
-#if defined (__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
-  SCB->VTOR = (uint32_t) &__Vectors;
+void SystemInit(void) {
+#if defined(__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
+  SCB->VTOR = (uint32_t)&__Vectors;
 #endif
 
-#if defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)
-  SCB->CPACR |= ((3U << 10U*2U) |           /* set CP10 Full Access */
-                 (3U << 11U*2U)  );         /* set CP11 Full Access */
+#if defined(__FPU_PRESENT) && (__FPU_PRESENT == 1U)
+  SCB->CPACR |= ((3U << 10U * 2U) | /* set CP10 Full Access */
+                 (3U << 11U * 2U)); /* set CP11 Full Access */
 #endif
 
 #ifdef UNALIGNED_SUPPORT_DISABLE
   SCB->CCR |= SCB_CCR_UNALIGN_TRP_Msk;
 #endif
-  
-  SystemCoreClock = VOR_HBO; // default HBO CLK
+
+  SystemCoreClock = VOR_HBO;  // default HBO CLK
 }

@@ -17,8 +17,6 @@ set(CMAKE_SCRIPT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # Set toolchain file which sets cross-compiler and ABI flags
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SCRIPT_PATH}/VA416XXToolchain.cmake")
 
-set(CONFIG_PATH config)
-
 set(VOR_VERBOSE_LEVEL "1" CACHE STRING "Verbosity level for debug output")
 set_property(CACHE VOR_VERBOSE_LEVEL PROPERTY STRINGS 0 1 2)
 
@@ -30,6 +28,7 @@ set(VOR_XTAL 10000000UL)
 set(VOR_HBO 20000000UL)
 set(VOR_EXTCLK 10000000UL)
 
+option(VOR_ENABLE_RTT "Enable RTT logger" ON)
 option(NVM1 "Generate image which can be flashed to non-volatile memory at position 1" OFF)
 if(NOT NVM1)
     option(NVM2 "Generate image which can be flashed to non-volatile memory at position 1" OFF)
@@ -50,6 +49,7 @@ else()
     set(LINKER_SCRIPT ${LINKER_SCRIPT_REGULAR})
 endif()
 
+set(CONFIG_PATH config)
 configure_file(${CONFIG_PATH}/VORConfig.h.in VORConfig.h)
 
 # Add executable

@@ -19,25 +19,26 @@
  * DAMAGES, FOR ANY REASON WHATSOEVER.
  *
  ****************************************************************************************/
- 
+
 #ifndef __VA416_DEBUG_H
 #define __VA416_DEBUG_H
 
-/*****************************************************************************/ 
-/* Include files                                                             */ 
+/*****************************************************************************/
+/* Include files                                                             */
 /*****************************************************************************/
 
-#include <stdint.h>
-#include <stdbool.h>
 #include <assert.h>
+#include <stdbool.h>
+#include <stdint.h>
+
 #include "VORConfig.h"
 
 #ifdef ENABLE_RTT
 #include "segger_rtt.h"
 #endif
 
-/*****************************************************************************/ 
-/* Global pre-processor symbols/macros ('#define')                           */ 
+/*****************************************************************************/
+/* Global pre-processor symbols/macros ('#define')                           */
 /*****************************************************************************/
 
 /** Runtime assert */
@@ -46,15 +47,18 @@
 #else
 #define c_assert(e) ((void)0)
 #endif
-  
+
 /** Compile time assert */
 #ifdef USE_ASSERT
 #define COMPILE_TIME_ASSERT(pred) \
-  switch(0){case 0:case pred:;}
+  switch (0) {                    \
+    case 0:                       \
+    case pred:;                   \
+  }
 #else
 #define COMPILE_TIME_ASSERT(pred) ((void)0)
 #endif
-  
+
 /** Debug print */
 #ifdef DEBUG_PRINTS
 #define dbgprintf(...) DBG_printf(__VA_ARGS__)
@@ -69,10 +73,10 @@
 #endif
 
 /*****************************************************************************/
-/* Global type definitions ('typedef')                                       */ 
+/* Global type definitions ('typedef')                                       */
 /*****************************************************************************/
-  
-typedef enum{
+
+typedef enum {
   en_stdio_none,
   en_stdio_uart0,
   en_stdio_uart1,
@@ -88,17 +92,17 @@ typedef enum{
 /* Global variable declarations ('extern', definition in C source)           */
 /*****************************************************************************/
 
-/*****************************************************************************/ 
-/* Global function prototypes ('extern', definition in C source)             */ 
+/*****************************************************************************/
+/* Global function prototypes ('extern', definition in C source)             */
 /*****************************************************************************/
 
 extern void VOR_printf(const char *fmt, ...);
-extern void DBG_printf(const char *fmt, ...);  // prints "DEBUG: " before the msg
-extern void DBG_println(const char *fmt, ...); // prints "DEBUG: " before the msg
+extern void DBG_printf(const char *fmt, ...);   // prints "DEBUG: " before the msg
+extern void DBG_println(const char *fmt, ...);  // prints "DEBUG: " before the msg
 extern void DBG_SetStdioOutput(en_stdio_t io);
 extern en_stdio_t DBG_GetStdioOutput(void);
 
-/*****************************************************************************/ 
-/* End of file                                                               */ 
+/*****************************************************************************/
+/* End of file                                                               */
 /*****************************************************************************/
 #endif /* __VA416_DEBUG_H */

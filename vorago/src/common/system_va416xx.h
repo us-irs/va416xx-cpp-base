@@ -1,10 +1,14 @@
-/**************************************************************************//**
- * @file     system_ARMCM4.h
- * @brief    CMSIS Device System Header File for
- *           ARMCM4 Device Series
- * @version  V5.00
- * @date     10. January 2018
- ******************************************************************************/
+/**************************************************************************/ /**
+                                                                              * @file
+                                                                              *system_ARMCM4.h
+                                                                              * @brief    CMSIS
+                                                                              *Device System Header
+                                                                              *File for ARMCM4
+                                                                              *Device Series
+                                                                              * @version  V5.00
+                                                                              * @date     10.
+                                                                              *January 2018
+                                                                              ******************************************************************************/
 /*
  * Copyright (c) 2009-2018 Arm Limited. All rights reserved.
  *
@@ -32,23 +36,21 @@ extern "C" {
 
 #include <stdint.h>
 
-extern uint32_t SystemCoreClock;     /*!< System Clock Frequency (Core Clock) */
-
+extern uint32_t SystemCoreClock; /*!< System Clock Frequency (Core Clock) */
 
 /**
   \brief Setup the microcontroller system.
 
    Initialize the System and update the SystemCoreClock variable.
  */
-extern void SystemInit (void);
-
+extern void SystemInit(void);
 
 /**
   \brief  Update SystemCoreClock variable.
 
    Updates the SystemCoreClock with current core Clock retrieved from cpu registers.
  */
-extern void SystemCoreClockUpdate (void);
+extern void SystemCoreClockUpdate(void);
 
 #ifdef __cplusplus
 }

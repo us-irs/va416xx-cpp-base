@@ -19,39 +19,40 @@
  * DAMAGES, FOR ANY REASON WHATSOEVER.
  *
  ****************************************************************************************/
- 
-/*****************************************************************************/ 
-/* Include files                                                             */ 
+
+/*****************************************************************************/
+/* Include files                                                             */
 /*****************************************************************************/
 
 #include "va416xx_hal_irqrouter.h"
-#include "va416xx_hal_timer.h"
-#include "va416xx_debug.h"
 
-/*****************************************************************************/ 
-/* Local pre-processor symbols/macros ('#define')                            */ 
+#include "va416xx_debug.h"
+#include "va416xx_hal_timer.h"
+
+/*****************************************************************************/
+/* Local pre-processor symbols/macros ('#define')                            */
 /*****************************************************************************/
 
 #define IRQROUTER_PERID (0x028107E9)
 
-/*****************************************************************************/ 
-/* Global variable definitions (declared in header file with 'extern')       */ 
+/*****************************************************************************/
+/* Global variable definitions (declared in header file with 'extern')       */
 /*****************************************************************************/
 
-/*****************************************************************************/ 
-/* Local type definitions ('typedef')                                        */ 
+/*****************************************************************************/
+/* Local type definitions ('typedef')                                        */
 /*****************************************************************************/
 
-/*****************************************************************************/ 
-/* Local variable definitions ('static')                                     */ 
+/*****************************************************************************/
+/* Local variable definitions ('static')                                     */
 /*****************************************************************************/
 
-/*****************************************************************************/ 
-/* Local function prototypes ('static')                                      */ 
+/*****************************************************************************/
+/* Local function prototypes ('static')                                      */
 /*****************************************************************************/
 
-/*****************************************************************************/ 
-/* Function implementation - global ('extern') and local ('static')          */ 
+/*****************************************************************************/
+/* Function implementation - global ('extern') and local ('static')          */
 /*****************************************************************************/
 
 /*******************************************************************************
@@ -61,16 +62,15 @@
  ** @return hal_status_t status of the driver call
  **
  ******************************************************************************/
-hal_status_t HAL_Irqrouter_Init(void)
-{
+hal_status_t HAL_Irqrouter_Init(void) {
   // reset
   HAL_Irqrouter_Reset();
-  
+
   // check PERID
-  if(IRQROUTER_PERID != VOR_IRQ_ROUTER->PERID){
+  if (IRQROUTER_PERID != VOR_IRQ_ROUTER->PERID) {
     return hal_status_badPeriphID;
   }
-  
+
   return hal_status_ok;
 }
 
@@ -84,9 +84,8 @@ hal_status_t HAL_Irqrouter_Init(void)
  ** @return hal_status_t status of the driver call
  **
  ******************************************************************************/
-hal_status_t HAL_Irqrouter_SetDmaSel(uint32_t channel, en_irqr_dmasel_t selCode)
-{
-  switch(channel){
+hal_status_t HAL_Irqrouter_SetDmaSel(uint32_t channel, en_irqr_dmasel_t selCode) {
+  switch (channel) {
     case 0:
       VOR_IRQ_ROUTER->DMASEL0 = (uint32_t)selCode;
       break;
@@ -115,9 +114,10 @@ hal_status_t HAL_Irqrouter_SetDmaSel(uint32_t channel, en_irqr_dmasel_t selCode)
  ** @return hal_status_t status of the driver call
  **
  ******************************************************************************/
-hal_status_t HAL_Irqrouter_SetDmaTtsel(uint32_t channel, en_irqr_dmattsel_t selCode)
-{
-  if(channel > 3){ return hal_status_badParam; }
+hal_status_t HAL_Irqrouter_SetDmaTtsel(uint32_t channel, en_irqr_dmattsel_t selCode) {
+  if (channel > 3) {
+    return hal_status_badParam;
+  }
   VOR_IRQ_ROUTER->DMATTSEL = (uint32_t)selCode << channel;
   return hal_status_ok;
 }
@@ -131,9 +131,8 @@ hal_status_t HAL_Irqrouter_SetDmaTtsel(uint32_t channel, en_irqr_dmattsel_t selC
  ** @return hal_status_t status of the driver call
  **
  ******************************************************************************/
-hal_status_t HAL_Irqrouter_SetAdcSel(uint32_t timerNum)
-{
-  if(timerNum >= HAL_NUM_TIMERS) return hal_status_badParam;
+hal_status_t HAL_Irqrouter_SetAdcSel(uint32_t timerNum) {
+  if (timerNum >= HAL_NUM_TIMERS) return hal_status_badParam;
   VOR_IRQ_ROUTER->ADCSEL = timerNum;
   return hal_status_ok;
 }
@@ -148,11 +147,9 @@ hal_status_t HAL_Irqrouter_SetAdcSel(uint32_t timerNum)
  ** @return hal_status_t status of the driver call
  **
  ******************************************************************************/
-hal_status_t HAL_Irqrouter_SetDacSel(uint32_t channel, uint32_t timerNum)
-{
-  if(timerNum >= HAL_NUM_TIMERS) return hal_status_badParam;
-  switch(channel)
-  {
+hal_status_t HAL_Irqrouter_SetDacSel(uint32_t channel, uint32_t timerNum) {
+  if (timerNum >= HAL_NUM_TIMERS) return hal_status_badParam;
+  switch (channel) {
     case 0:
       VOR_IRQ_ROUTER->DACSEL0 = timerNum;
       break;
@@ -172,8 +169,7 @@ hal_status_t HAL_Irqrouter_SetDacSel(uint32_t channel, uint32_t timerNum)
  ** @return hal_status_t status of the driver call
  **
  ******************************************************************************/
-hal_status_t HAL_Irqrouter_Reset(void)
-{
+hal_status_t HAL_Irqrouter_Reset(void) {
   IRQROUTER_ENABLE_CLOCK();
   VOR_SYSCONFIG->PERIPHERAL_RESET &= ~SYSCONFIG_PERIPHERAL_RESET_IRQ_Msk;
   __NOP();
@@ -189,13 +185,12 @@ hal_status_t HAL_Irqrouter_Reset(void)
  ** @return hal_status_t status of the driver call
  **
  ******************************************************************************/
-hal_status_t HAL_Irqrouter_DeInit(void)
-{
+hal_status_t HAL_Irqrouter_DeInit(void) {
   HAL_Irqrouter_Reset();
   IRQROUTER_DISABLE_CLOCK();
   return hal_status_ok;
 }
 
-/*****************************************************************************/ 
-/* End of file                                                               */ 
+/*****************************************************************************/
+/* End of file                                                               */
 /*****************************************************************************/
