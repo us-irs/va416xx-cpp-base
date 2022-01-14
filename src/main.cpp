@@ -15,6 +15,7 @@ int main(void) {
   if (result != hal_status_ok) {
     VOR_printf("HAL init failed with code %d", result);
   }
+  VOR_printf("Toggling LED PG5 periodically\n");
   for (;;) {
     GPIO_TOG(VOR_PORTG, 5);
     for (size_t idx = 0; idx < 10000000; idx++) {
